@@ -7,7 +7,7 @@ import UserTemplate from "../templates/user-template";
 const CustomRoutes = () => {
   return (
     <BrowserRouter>
-      <ScrollToTop />
+      <ScrollToTop></ScrollToTop>
       <Routes>
         <Route path="/">
           <Route
