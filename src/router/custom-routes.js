@@ -7,22 +7,21 @@ import UserTemplate from "../templates/user-template";
 const CustomRoutes = () => {
   return (
     <BrowserRouter>
-      <ScrollToTop>
-        <Routes>
-          <Route path="/">
-            <Route
-              index
-              element={
-                <UserTemplate>
-                  <HomePage />
-                </UserTemplate>
-              }
-            />
-            <Route path="about" element={<UserTemplate></UserTemplate>} />
-            <Route path="contact" element={<UserTemplate></UserTemplate>} />
-          </Route>
-        </Routes>
-      </ScrollToTop>
+      <ScrollToTop></ScrollToTop>
+      <Routes>
+        <Route path="/">
+          <Route
+            index
+            element={
+              <UserTemplate>
+                <HomePage />
+              </UserTemplate>
+            }
+          />
+          <Route path="about" element={<UserTemplate></UserTemplate>} />
+          <Route path="contact" element={<UserTemplate></UserTemplate>} />
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 };

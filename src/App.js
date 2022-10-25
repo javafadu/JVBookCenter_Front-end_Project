@@ -1,13 +1,13 @@
-import CustomRoute from "./router/custom-routes";
-
-
+import CustomRoutes from "./router/custom-routes";
 
 function App() {
   return (
-  <div className="App">
-    <CustomRoute/>
-  </div>
-  )
+    <>
+      <div className="App">
+        <CustomRoutes />
+      </div>
+    </>
+  );
 }
 
 export default App;
