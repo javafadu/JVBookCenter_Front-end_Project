@@ -1,7 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../../../../assets/scss/style.scss";
-import "../../../../assets/css/style.css";
 import logo from "../../../../assets/img/logo.png";
 import { settings } from "../../../../utils/settings";
 
@@ -13,11 +11,12 @@ const Header = () => {
           <div className="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
             <div className="d-inline-flex align-items-center text-white">
               <small>
-                <i className="fa fa-phone-alt mr-2"></i>+012 345 6789
+                <i className="fa fa-phone-alt mr-2"></i>
+                {settings.phone1}
               </small>
               <small className="px-3">|</small>
               <small>
-                <i className="fa fa-envelope mr-2"></i>info@example.com
+                <i className="fa fa-envelope mr-2"></i>{settings.email}
               </small>
             </div>
           </div>
@@ -63,14 +62,16 @@ const Header = () => {
             id="navbarCollapse"
           >
             <div className="navbar-nav mx-auto py-0">
-              <a href="index.html" className="nav-item nav-link active">
+              <Link to="/" className="nav-item nav-link active">
                 Home
-              </a>
-              <a href="about.html" className="nav-item nav-link">
+              </Link>
+              <Link to="/library" className="nav-item nav-link">
                 Library
-              </a>
+              </Link>
 
-              <Link className="nav-item nav-link">Contact</Link>
+              <Link to="/contact" className="nav-item nav-link">
+                Contact
+              </Link>
             </div>
             <Link className="btn btn-primary py-2 px-4 d-none d-lg-block mx-2">
               Sign Up
