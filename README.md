@@ -1,4 +1,4 @@
-# **_NAME_** Library Application
+# **_FRONT-END PROJECT_** Library Application
 
 This project is developed with React JS by Javanarlar Backend Developers
 
