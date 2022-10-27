@@ -1,8 +1,6 @@
 import React from "react";
 
 const BookCard = (props) => {
-  console.log(props);
-
   return (
     <div className="col-lg-4 col-md-6 pb-4">
       <a
@@ -11,9 +9,8 @@ const BookCard = (props) => {
       >
         <img
           className="img-fluid"
-          src={require(`../../../${props.imageLink}`).default}
-          key={props.id}
-          alt=""
+          src={require(`../../../${props.imageLink}`)}
+          alt="book_image"
         />
         <div className="courses-text">
           <h4 className="text-center text-white px-3">
