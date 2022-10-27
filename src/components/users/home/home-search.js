@@ -11,7 +11,7 @@ const HomeSearch = () => {
               <input
                 type="text"
                 className="form-control border-light my-0.8 mx-2"
-                placeholder="Keyword"
+                placeholder="Name or Author or ISBN or Publisher"
               />
               <div className="input-group-append">
                 <button className="btn btn-primary px-3 px-lg-5">Search</button>

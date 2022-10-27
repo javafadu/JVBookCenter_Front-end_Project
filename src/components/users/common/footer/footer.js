@@ -15,8 +15,6 @@ const Footer = () => {
     const resp2 = await getTopCategories(5);
     const resp3 = await getTopAuthors(5);
 
-    console.log(resp.data);
-
     setBooks(resp.data);
     setCategories(resp2.data);
     setAuthors(resp3.data);

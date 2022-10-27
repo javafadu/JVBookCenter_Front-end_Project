@@ -26,7 +26,7 @@
   --success: #28a745;
   --info: #17a2b8;
   --warning: #ffc107;
-  --danger: #dc3545;
+  --danger:  rgb(246, 153, 63);
   --light: #ECF4FF;
   --dark: #120F2D;
   --breakpoint-xs: 0;
@@ -41,6 +41,8 @@
   --color2: rgba(246, 153, 63,0.7);
   --color3: rgb(255, 237, 74);
   --color4:rgba(255, 237, 74,0.7);
+  --color5:#964B00; 
+  --color6: #FF9021;
 
 }
 
@@ -2380,14 +2382,14 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #2878EB;
-  border-color: #2878EB;
+  background-color: var(--color5);
+  border-color: var(--color5);
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #1465d9;
-  border-color: #135fcd;
+  background-color: var(--color6);
+  border-color: var(--color6);
 }
 
 .btn-primary:focus, .btn-primary.focus {
