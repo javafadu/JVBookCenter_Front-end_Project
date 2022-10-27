@@ -1,6 +1,8 @@
 import React from "react";
 
 const BookCard = (props) => {
+  console.log(props);
+
   return (
     <div className="col-lg-4 col-md-6 pb-4">
       <a
@@ -13,17 +15,15 @@ const BookCard = (props) => {
           alt="book_image"
         />
         <div className="courses-text">
-          <h4 className="text-center text-white px-3">
-            Web design & development courses for beginners
-          </h4>
+          <h4 className="text-center text-white px-3">{props.name}</h4>
           <div className="border-top w-100 mt-3">
             <div className="d-flex justify-content-between p-4">
               <span className="text-white">
-                <i className="fa fa-user mr-2"></i>Jhon Doe
+                <i className="fa fa-user mr-2"></i>
+                {props.bookAuthor.name}
               </span>
               <span className="text-white">
-                <i className="fa fa-star mr-2"></i>4.5
-                <small>(250)</small>
+                <i className="fa fa-star mr-2"></i> {props.bookCategory.name}
               </span>
             </div>
           </div>
