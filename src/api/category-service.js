@@ -3,7 +3,9 @@ import { settings } from "../utils/settings";
 
 const API_URL = settings.apiURL;
 
-export const getTopBooks = (topn) => {
+export const getTopCategories = (topn) => {
   const { top } = topn;
-  return axios.get(`${API_URL}/public/top-books`, { params: { top: topn } });
+  return axios.get(`${API_URL}/public/top-categories`, {
+    params: { top: topn },
+  });
 };
