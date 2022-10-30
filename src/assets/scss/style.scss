@@ -1,6 +1,21 @@
+@import "./variables";
+
+
+/* IMPORT LIBRARIES */
+@import "bootstrap/scss/bootstrap";
+@import "sweetalert2/src/variables";
+@import "sweetalert2/src/sweetalert2";
+@import 'swiper/css';
+
+/* Custom Styles */
+.btn-primary {
+    color: white;
+}
+
+
 /******* Bootstrap Theming ********/
 
-$primary: #2878EB;
+/* $primary: #2878EB; */
 $secondary: #F14D5D;
 $light: #ECF4FF;
 $dark: #120F2D;
@@ -8,25 +23,9 @@ $color1: rgb(246, 153, 63);
 $color2: rgba(246, 153, 63,0.7);
 $color3: rgb(255, 237, 74);
 $color4:rgba(255, 237, 74,0.7);
+$color5:#964B00; 
+$color6: #FF9021;
 
-@import "~bootstrap/scss/bootstrap";
-
-
-$font-family-base: 'Open Sans', sans-serif;
-
-$headings-font-family: 'Jost', sans-serif;
-
-$body-bg: #FFFFFF;
-
-$body-color: #6B6A75;
-
-$headings-color: $dark;
-
-$enable-responsive-font-sizes: true;
-
-$border-radius: false;
-
-@import "bootstrap/scss/bootstrap";
 
 
 /********** Custom CSS ************/
