@@ -4,11 +4,13 @@ import { getTopBooks } from "../../../../api/book-service";
 import { getTopCategories } from "../../../../api/category-service";
 import { getTopAuthors } from "../../../../api/author-service";
 import { settings } from "../../../../utils/settings";
+import Loading from "../../../general/loading/loading";
 
 const Footer = () => {
   const [books, setBooks] = useState([]);
   const [categories, setCategories] = useState([]);
   const [authors, setAuthors] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const loadData = async () => {
     const resp = await getTopBooks(5);
@@ -18,6 +20,8 @@ const Footer = () => {
     setBooks(resp.data);
     setCategories(resp2.data);
     setAuthors(resp3.data);
+
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -61,35 +65,47 @@ const Footer = () => {
             <div className="col-sm-6 col-md-3 mb-5">
               <h3 className="text-white mb-4">Top Books</h3>
               <div className="d-flex flex-column justify-content-start">
-                {books.map((book, index) => (
-                  <Link className="text-white-50 mb-2" href="#" key={index}>
-                    <i className="fa fa-angle-right mr-2"></i>
-                    {book[1]}
-                  </Link>
-                ))}
+                {loading ? (
+                  <Loading />
+                ) : (
+                  books.map((book, index) => (
+                    <Link className="text-white-50 mb-2" href="#" key={index}>
+                      <i className="fa fa-angle-right mr-2"></i>
+                      {book[1]}
+                    </Link>
+                  ))
+                )}
               </div>
             </div>
             <div className="col-sm-6 col-md-3 mb-5">
               <h3 className="text-white mb-4">Top Categories</h3>
               <div className="d-flex flex-column justify-content-start">
-                {categories.map((category, index) => (
-                  <Link className="text-white-50 mb-2" href="#" key={index}>
-                    <i className="fa fa-angle-right mr-2"></i>
-                    {category[1]}
-                  </Link>
-                ))}
+                {loading ? (
+                  <Loading />
+                ) : (
+                  categories.map((category, index) => (
+                    <Link className="text-white-50 mb-2" href="#" key={index}>
+                      <i className="fa fa-angle-right mr-2"></i>
+                      {category[1]}
+                    </Link>
+                  ))
+                )}
               </div>
             </div>
 
             <div className="col-sm-6 col-md-3 mb-5">
               <h3 className="text-white mb-4">Top Authors</h3>
               <div className="d-flex flex-column justify-content-start">
-                {authors.map((author, index) => (
-                  <Link className="text-white-50 mb-2" href="#" key={index}>
-                    <i className="fa fa-angle-right mr-2"></i>
-                    {author[1]}
-                  </Link>
-                ))}
+                {loading ? (
+                  <Loading />
+                ) : (
+                  authors.map((author, index) => (
+                    <Link className="text-white-50 mb-2" href="#" key={index}>
+                      <i className="fa fa-angle-right mr-2"></i>
+                      {author[1]}
+                    </Link>
+                  ))
+                )}
               </div>
             </div>
           </div>

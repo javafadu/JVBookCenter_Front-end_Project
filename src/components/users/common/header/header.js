@@ -1,7 +1,10 @@
 import React from "react";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import logo from "../../../../assets/img/logo.png";
 import { settings } from "../../../../utils/settings";
+import UserMenu from "./user-menu";
+import "./header.scss";
 
 const Header = () => {
   return (
@@ -16,7 +19,8 @@ const Header = () => {
               </small>
               <small className="px-3">|</small>
               <small>
-                <i className="fa fa-envelope mr-2"></i>{settings.email}
+                <i className="fa fa-envelope mr-2"></i>
+                {settings.email}
               </small>
             </div>
           </div>
@@ -42,46 +46,32 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="container-fluid p-0 sticky-top">
-        <nav className="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
-          <a href="index.html" className="navbar-brand ml-lg-3">
-            <h1 className="m-0 text-uppercase text-primary">
-              <img src={logo} alt={settings.siteName} className="img-fluid" />
-            </h1>
-          </a>
-          <button
-            type="button"
-            className="navbar-toggler"
-            data-toggle="collapse"
-            data-target="#navbarCollapse"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div
-            className="collapse navbar-collapse justify-content-between px-lg-3"
-            id="navbarCollapse"
-          >
-            <div className="navbar-nav mx-auto py-0">
-              <Link to="/" className="nav-item nav-link active">
+      <Navbar bg="white" expand="lg" className="sticky-top main-navbar">
+        <Container>
+          <Navbar.Brand as={Link} to="/" title={settings.siteName}>
+            <img src={logo} alt={settings.siteName} />
+          </Navbar.Brand>
+          <Navbar.Toggle
+            aria-controls="navbarScroll"
+            className="text-warning"
+          />
+          <Navbar.Collapse id="navbarScroll">
+            <Nav className="mx-auto my-2 my-lg-0">
+              <Nav.Link as={Link} to="/">
                 Home
-              </Link>
-              <Link to="/library" className="nav-item nav-link">
+              </Nav.Link>
+              <Nav.Link as={Link} to="/library">
                 Library
-              </Link>
-
-              <Link to="/contact" className="nav-item nav-link">
+              </Nav.Link>
+              <Nav.Link as={Link} to="/contact">
                 Contact
-              </Link>
-            </div>
-            <Link className="btn btn-primary py-2 px-4 d-none d-lg-block mx-2">
-              Sign Up
-            </Link>
-            <Link className="btn btn-primary py-2 px-4 d-none d-lg-block">
-              Login
-            </Link>
-          </div>
-        </nav>
-      </div>
+              </Nav.Link>
+            </Nav>
+
+            <UserMenu />
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
     </>
   );
 };
