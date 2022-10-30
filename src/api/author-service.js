@@ -9,3 +9,14 @@ export const getTopAuthors = (topn) => {
     params: { top: topn },
   });
 };
+
+export const getAllAuthors = (
+  page = 0,
+  size = 50,
+  sort = "",
+  direction = "ASC"
+) => {
+  return axios.get(
+    `${API_URL}/authors?page=${page}&size=${size}&sort=name&direction=${direction}`
+  );
+};

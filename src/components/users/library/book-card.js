@@ -4,7 +4,7 @@ const BookCard = (props) => {
   console.log(props);
 
   return (
-    <div className="col-lg-4 col-md-6 pb-4">
+    <div className="col-lg-3 col-md-6 pb-4">
       <a
         className="courses-list-item position-relative d-block overflow-hidden mb-2"
         href="detail.html"

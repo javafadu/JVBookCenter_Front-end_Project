@@ -46,7 +46,7 @@ const Header = () => {
         </div>
       </div>
 
-      <Navbar bg="white" expand="lg" className="sticky-top main-navbar">
+      <Navbar bg="white" expand="lg" className="sticky-top main-navbar py-0">
         <Container>
           <Navbar.Brand as={Link} to="/" title={settings.siteName}>
             <img src={logo} alt={settings.siteName} />

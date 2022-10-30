@@ -47,17 +47,17 @@ const Footer = () => {
                 <i className="fa fa-envelope mr-2"></i>
                 {settings.email}
               </p>
-              <div className="d-flex justify-content-start mt-4">
-                <Link className="text-white mr-4" href="#">
+              <div className="d-inline-flex align-items-center">
+                <Link className="text-white px-2" href="#">
                   <i className="fab fa-2x fa-twitter"></i>
                 </Link>
-                <Link className="text-white mr-4" href="#">
+                <Link className="text-white px-2" href="#">
                   <i className="fab fa-2x fa-facebook-f"></i>
                 </Link>
-                <Link className="text-white mr-4" href="#">
+                <Link className="text-white px-2" href="#">
                   <i className="fab fa-2x fa-linkedin-in"></i>
                 </Link>
-                <Link className="text-white" href="#">
+                <Link className="text-white px-2" href="#">
                   <i className="fab fa-2x fa-instagram"></i>
                 </Link>
               </div>

@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { getBooksByPage } from "../../../api/book-service";
 import BookCard from "./book-card";
 import { Pagination, Row } from "react-bootstrap";
+import Loading from "../../general/loading/loading";
 
 const BookCards = () => {
   const [books, setBooks] = useState([]);
   const [pagination, setPagination] = useState({});
+  const [loading, setLoading] = useState(true);
 
   const loadData = async (page) => {
     try {
@@ -30,6 +32,8 @@ const BookCards = () => {
       });
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -43,11 +47,16 @@ const BookCards = () => {
         <div className="row mx-0 justify-content-center">
           <div className="col-lg-8"></div>
         </div>
-        <div className="row">
-          {books.map((book, index) => (
-            <BookCard {...book} key={index} />
-          ))}
-        </div>
+
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className="row">
+            {books.map((book, index) => (
+              <BookCard {...book} key={index} />
+            ))}
+          </div>
+        )}
 
         <div>
           {pagination.totalPages > 1 && (
