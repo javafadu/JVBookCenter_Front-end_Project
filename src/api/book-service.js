@@ -8,17 +8,32 @@ export const getTopBooks = (topn) => {
   return axios.get(`${API_URL}/public/top-books`, { params: { top: topn } });
 };
 
-export const getBooksByPage = (
+/* Default Get Featured Books*/
+
+export const getFeaturedBooks = (
+  page = 0,
+  size = 6,
+  sort = "name",
+  direction = "ASC"
+) => {
+  return axios.get(
+    `${API_URL}/books/featured-books?page=${page}&size=${size}&sort=name&direction=${direction}`
+  );
+};
+
+/* Get All book with q filter */
+
+export const getFilteredBooks = (
   page = 0,
   size = 6,
   sort = "name",
   direction = "ASC",
   q = "",
-  cat = 5,
+  cat = "",
   author = "",
   publisher = ""
 ) => {
   return axios.get(
-    `${API_URL}/books?page=0&size=5&sort=name&direction=ASC&cat=${cat}`
+    `${API_URL}/books?page=${page}&size=${size}&sort=name&direction=${direction}&q=${q}&cat=${cat}&author=${author}&publisher=${publisher}`
   );
 };

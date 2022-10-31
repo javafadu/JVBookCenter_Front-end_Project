@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import BookCards from "../library/book-cards";
 
 const HomeSearch = () => {
+  const [input, setInput] = useState("");
+
+  let navigate = useNavigate();
+  const handleSubmit = () => {
+    let path = `/library?q=${input}`;
+    navigate(path);
+  };
+
   return (
     <>
       <div className="jumbotron jumbotron-fluid position-relative overlay-bottom mb-5">
@@ -12,9 +22,16 @@ const HomeSearch = () => {
                 type="text"
                 className="form-control border-light my-2 mx-2"
                 placeholder="Name or Author or ISBN or Publisher"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
               />
               <div className="input-group-append">
-                <button className="btn btn-primary my-2 px-3 px-lg-5">
+                <button
+                  type="submit"
+                  value="Submit"
+                  className="btn btn-primary my-2 px-3 px-lg-5"
+                  onClick={handleSubmit}
+                >
                   Search
                 </button>
               </div>

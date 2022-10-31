@@ -1,8 +1,6 @@
 import React from "react";
 
 const BookCard = (props) => {
-  console.log(props);
-
   return (
     <div className="col-lg-3 col-md-6 pb-4">
       <a

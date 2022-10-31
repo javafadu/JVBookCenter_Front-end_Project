@@ -5,12 +5,12 @@ const SearchFilter = () => {
   return (
     <>
       <div className="jumbotron jumbotron-fluid position-relative overlay-bottom">
-        <div className="container text-center mt-2 py-2">
-          <div className="mx-auto mb-5 w-50">
+        <div className="container text-center mt-2 pb-5 pt-2">
+          <div className="mx-auto mb-3 w-50">
             <div className="input-group">
               <input
                 type="text"
-                className="form-control border-light mx-2"
+                className="form-control border-light mx-3"
                 placeholder="Name or Author or ISBN or Publisher"
               />
               <div className="input-group-append">

@@ -1,18 +1,50 @@
 import React, { useEffect, useState } from "react";
-import { getBooksByPage } from "../../../api/book-service";
+import { getFeaturedBooks, getFilteredBooks } from "../../../api/book-service";
 import BookCard from "./book-card";
 import { Pagination, Row } from "react-bootstrap";
 import Loading from "../../general/loading/loading";
+import { useLocation, useSearchParams } from "react-router-dom";
 
-const BookCards = () => {
+const BookCards = (props) => {
   const [books, setBooks] = useState([]);
   const [pagination, setPagination] = useState({});
   const [loading, setLoading] = useState(true);
 
+  let searchQ = "";
+  let searchCat = "";
+  let searchAuthor = "";
+  let searchPublisher = "";
+
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  if (params.get("q") != null) searchQ = params.get("q");
+  if (params.get("cat") != null) searchCat = params.get("cat");
+  if (params.get("author") != null) searchAuthor = params.get("author");
+  if (params.get("publisher") != null)
+    searchPublisher = params.get("publisher");
+
+  console.log(searchQ);
+
+  const filterResult =
+    params.get("q") ||
+    params.get("cat") ||
+    params.get("author") ||
+    params.get("publisher")
+      ? getFilteredBooks
+      : getFeaturedBooks;
+
   const loadData = async (page) => {
     try {
-      const resp = await getBooksByPage(page, 5);
-
+      const resp = await filterResult(
+        page,
+        8,
+        "name",
+        "ASC",
+        searchQ,
+        searchCat,
+        searchAuthor,
+        searchPublisher
+      );
       const {
         content,
         numberOfElements,
