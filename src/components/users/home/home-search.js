@@ -38,6 +38,9 @@ const HomeSearch = () => {
             </div>
           </div>
         </div>
+        <br />
+        <br />
+        <br />
       </div>
     </>
   );

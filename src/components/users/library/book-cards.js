@@ -4,6 +4,7 @@ import BookCard from "./book-card";
 import { Pagination, Row } from "react-bootstrap";
 import Loading from "../../general/loading/loading";
 import { useLocation, useSearchParams } from "react-router-dom";
+import "./book-cards.scss";
 
 const BookCards = (props) => {
   const [books, setBooks] = useState([]);
@@ -92,7 +93,7 @@ const BookCards = (props) => {
 
         <div>
           {pagination.totalPages > 1 && (
-            <Row className="vehicles-pagination">
+            <Row className="books-pagination">
               <Pagination>
                 <Pagination.First
                   onClick={() => loadData(0)}
