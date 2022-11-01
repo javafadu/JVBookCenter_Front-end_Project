@@ -14,12 +14,12 @@ const Header = () => {
           <div className="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
             <div className="d-inline-flex align-items-center text-white">
               <small>
-                <i className="fa fa-phone-alt mr-2"></i>
+                <i className="fa fa-phone-alt mr-2"></i> &nbsp;
                 {settings.phone1}
               </small>
               <small className="px-3">|</small>
               <small>
-                <i className="fa fa-envelope mr-2"></i>
+                <i className="fa fa-envelope mr-2"></i> &nbsp;
                 {settings.email}
               </small>
             </div>

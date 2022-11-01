@@ -36,15 +36,15 @@ const Footer = () => {
             <div className="col-sm-6 col-md-3 mb-3">
               <h3 className="text-white mb-4">Get In Touch</h3>
               <p>
-                <i className="fa fa-map-marker-alt mr-2"></i>
+                <i className="fa fa-map-marker-alt mr-2"></i>&nbsp;
                 {settings.address}
               </p>
               <p>
-                <i className="fa fa-phone-alt mr-2"></i>
+                <i className="fa fa-phone-alt mr-2"></i>&nbsp;
                 {settings.phone1}
               </p>
               <p>
-                <i className="fa fa-envelope mr-2"></i>
+                <i className="fa fa-envelope mr-2"></i>&nbsp;
                 {settings.email}
               </p>
               <div className="d-inline-flex align-items-center">
@@ -70,7 +70,7 @@ const Footer = () => {
                 ) : (
                   books.map((book, index) => (
                     <Link className="text-white-50 mb-2" href="#" key={index}>
-                      <i className="fa fa-angle-right mr-2"></i>
+                      <i className="fa fa-angle-right mr-2"></i>&nbsp;
                       {book[1]}
                     </Link>
                   ))
@@ -85,7 +85,7 @@ const Footer = () => {
                 ) : (
                   categories.map((category, index) => (
                     <Link className="text-white-50 mb-2" href="#" key={index}>
-                      <i className="fa fa-angle-right mr-2"></i>
+                      <i className="fa fa-angle-right mr-2"></i>&nbsp;
                       {category[1]}
                     </Link>
                   ))
@@ -101,7 +101,7 @@ const Footer = () => {
                 ) : (
                   authors.map((author, index) => (
                     <Link className="text-white-50 mb-2" href="#" key={index}>
-                      <i className="fa fa-angle-right mr-2"></i>
+                      <i className="fa fa-angle-right mr-2"></i>&nbsp;
                       {author[1]}
                     </Link>
                   ))

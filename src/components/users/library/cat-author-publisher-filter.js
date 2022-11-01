@@ -44,8 +44,9 @@ const CatAuthorPublisherFilter = () => {
               title="Categories"
             >
               {categories.map((category, index) => {
+                const catLink = `/library?cat=${category.id}`;
                 return (
-                  <Dropdown.Item href="#/action-1" key={index}>
+                  <Dropdown.Item href={catLink} key={index}>
                     {category.name}
                   </Dropdown.Item>
                 );
@@ -64,8 +65,9 @@ const CatAuthorPublisherFilter = () => {
               title="Authors"
             >
               {authors.map((author, index) => {
+                const authorLink = `/library?author=${author.id}`;
                 return (
-                  <Dropdown.Item href="#/action-1" key={index}>
+                  <Dropdown.Item href={authorLink} key={index}>
                     {author.name}
                   </Dropdown.Item>
                 );
@@ -84,8 +86,9 @@ const CatAuthorPublisherFilter = () => {
               title="Publishers"
             >
               {publishers.map((publisher, index) => {
+                const publisherLink = `/library?publisher=${publisher.id}`;
                 return (
-                  <Dropdown.Item href="#/action-1" key={index}>
+                  <Dropdown.Item href={publisherLink} key={index}>
                     {publisher.name}
                   </Dropdown.Item>
                 );
