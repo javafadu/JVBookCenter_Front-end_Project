@@ -37,3 +37,7 @@ export const getFilteredBooks = (
     `${API_URL}/books?page=${page}&size=${size}&sort=name&direction=${direction}&q=${q}&cat=${cat}&author=${author}&publisher=${publisher}`
   );
 };
+
+export const getBookWithId = (id) => {
+  return axios.get(`${API_URL}/books/${id}`);
+};

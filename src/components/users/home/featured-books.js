@@ -104,24 +104,29 @@ const FeaturedBooks = () => {
                   <div className="swiper-cont">
                     <div className="container py-2">
                       <div className="owl-carousel team-carousel position-relative">
-                        <div className="team-item">
-                          <img
-                            className="img-fluid rounded"
-                            src={require(`../../../${book.imageLink}`)}
-                            alt=""
-                          />
-                          <div className="bg-light text-center p-2">
-                            <span className="book-title">
-                              <h5 className="mb-3">{book.name}</h5>
-                            </span>
-                            <span className="book-author">
-                              <p className="mb-2">{book.bookAuthor.name}</p>
-                            </span>
-                            <div className="d-flex justify-content-center">
-                              {book.publishDate}
+                        <a
+                          className="feature-books-link"
+                          href={`./book-detail/?id=${book.id}`}
+                        >
+                          <div className="team-item">
+                            <img
+                              className="img-fluid rounded"
+                              src={require(`../../../${book.imageLink}`)}
+                              alt=""
+                            />
+                            <div className="bg-light text-center p-2">
+                              <div className="book-title">
+                                <h5 className="mb-3">{book.name}</h5>
+                              </div>
+                              <div className="book-author">
+                                <p className="mb-2">{book.bookAuthor.name}</p>
+                              </div>
+                              <div className="d-flex justify-content-center">
+                                {book.publishDate}
+                              </div>
                             </div>
                           </div>
-                        </div>
+                        </a>
                       </div>
                     </div>
                   </div>

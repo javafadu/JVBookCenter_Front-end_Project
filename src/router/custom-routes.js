@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "../components/general/scroll-to-top/scroll-to-top";
+import BookDetail from "../components/users/book-detail/book-detail";
 import ContactPage from "../pages/users/contact-page";
 import HomePage from "../pages/users/home-page";
 import LibraryPage from "../pages/users/library-page";
@@ -20,8 +21,30 @@ const CustomRoutes = () => {
               </UserTemplate>
             }
           />
-          <Route path="library" element={<UserTemplate><LibraryPage/></UserTemplate>} />
-          <Route path="contact" element={<UserTemplate><ContactPage/></UserTemplate>} />
+          <Route
+            path="library"
+            element={
+              <UserTemplate>
+                <LibraryPage />
+              </UserTemplate>
+            }
+          />
+          <Route
+            path="contact"
+            element={
+              <UserTemplate>
+                <ContactPage />
+              </UserTemplate>
+            }
+          />
+          <Route
+            path="book-detail"
+            element={
+              <UserTemplate>
+                <BookDetail />
+              </UserTemplate>
+            }
+          />
         </Route>
       </Routes>
     </BrowserRouter>
