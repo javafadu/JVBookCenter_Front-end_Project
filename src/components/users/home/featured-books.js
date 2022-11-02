@@ -1,158 +1,136 @@
-import React from "react";
-import SectionTitle from "../../general/section-title/section-title";
+import React, { useState, useRef, useEffect } from "react";
+import { Container } from "react-bootstrap";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
 import "./featured-books.scss";
+import { getFeaturedBooks } from "../../../api/book-service";
+import SectionTitle from "../../general/section-title/section-title";
 
 const FeaturedBooks = () => {
-  return (
-    <div className="text-center">
-      <SectionTitle title="Featured Books" />
-      <div className="container-fluid py-1">
-        <div className="container py-5">
-          <div className="owl-carousel team-carousel position-relative d-flex">
-            <div className="team-item">
-              <img
-                className="img-fluid w-100"
-                src={require(`../../../assets/img/team-1.jpg`)}
-                alt=""
-              />
-              <div className="bg-light text-center p-4">
-                <h5 className="mb-3">Instructor Name</h5>
-                <p className="mb-2">Web Design & Development</p>
-                <div className="d-flex justify-content-center">
-                  <a className="mx-1 p-1" href="#">
-                    <i className="fab fa-twitter"></i>
-                  </a>
-                  <a className="mx-1 p-1" href="#">
-                    <i className="fab fa-facebook-f"></i>
-                  </a>
-                  <a className="mx-1 p-1" href="#">
-                    <i className="fab fa-linkedin-in"></i>
-                  </a>
-                  <a className="mx-1 p-1" href="#">
-                    <i className="fab fa-instagram"></i>
-                  </a>
-                  <a className="mx-1 p-1" href="#">
-                    <i className="fab fa-youtube"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="team-item">
-              <img
-                className="img-fluid w-100"
-                src={require(`../../../assets/img/team-2.jpg`)}
-                alt=""
-              />
-              <div className="bg-light text-center p-4">
-                <h5 className="mb-3">Instructor Name</h5>
-                <p className="mb-2">Web Design & Development</p>
-                <div className="d-flex justify-content-center">
-                  <a className="mx-1 p-1" href="#">
-                    <i className="fab fa-twitter"></i>
-                  </a>
-                  <a className="mx-1 p-1" href="#">
-                    <i className="fab fa-facebook-f"></i>
-                  </a>
-                  <a className="mx-1 p-1" href="#">
-                    <i className="fab fa-linkedin-in"></i>
-                  </a>
-                  <a className="mx-1 p-1" href="#">
-                    <i className="fab fa-instagram"></i>
-                  </a>
-                  <a className="mx-1 p-1" href="#">
-                    <i className="fab fa-youtube"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="team-item">
-              <img
-                className="img-fluid w-100"
-                src={require(`../../../assets/img/team-3.jpg`)}
-                alt=""
-              />
-              <div className="bg-light text-center p-4">
-                <h5 className="mb-3">Instructor Name</h5>
-                <p className="mb-2">Web Design & Development</p>
-                <div className="d-flex justify-content-center">
-                  <a className="mx-1 p-1" href="#">
-                    <i className="fab fa-twitter"></i>
-                  </a>
-                  <a className="mx-1 p-1" href="#">
-                    <i className="fab fa-facebook-f"></i>
-                  </a>
-                  <a className="mx-1 p-1" href="#">
-                    <i className="fab fa-linkedin-in"></i>
-                  </a>
-                  <a className="mx-1 p-1" href="#">
-                    <i className="fab fa-instagram"></i>
-                  </a>
-                  <a className="mx-1 p-1" href="#">
-                    <i className="fab fa-youtube"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="team-item">
-              <img
-                className="img-fluid w-100"
-                src={require(`../../../assets/img/team-4.jpg`)}
-                alt=""
-              />
-              <div className="bg-light text-center p-4">
-                <h5 className="mb-3">Instructor Name</h5>
-                <p className="mb-2">Web Design & Development</p>
-                <div className="d-flex justify-content-center">
-                  <a className="mx-1 p-1" href="#">
-                    <i className="fab fa-twitter"></i>
-                  </a>
-                  <a className="mx-1 p-1" href="#">
-                    <i className="fab fa-facebook-f"></i>
-                  </a>
-                  <a className="mx-1 p-1" href="#">
-                    <i className="fab fa-linkedin-in"></i>
-                  </a>
-                  <a className="mx-1 p-1" href="#">
-                    <i className="fab fa-instagram"></i>
-                  </a>
-                  <a className="mx-1 p-1" href="#">
-                    <i className="fab fa-youtube"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
+  const [isEnd, setIsEnd] = useState(false);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const swiperRef = useRef(null);
+  const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [pagination, setPagination] = useState({});
 
-            <div className="team-item">
-              <img
-                className="img-fluid w-100"
-                src={require(`../../../assets/img/team-4.jpg`)}
-                alt=""
-              />
-              <div className="bg-light text-center p-4">
-                <h5 className="mb-3">Instructor Name</h5>
-                <p className="mb-2">Web Design & Development</p>
-                <div className="d-flex justify-content-center">
-                  <a className="mx-1 p-1" href="#">
-                    <i className="fab fa-twitter"></i>
-                  </a>
-                  <a className="mx-1 p-1" href="#">
-                    <i className="fab fa-facebook-f"></i>
-                  </a>
-                  <a className="mx-1 p-1" href="#">
-                    <i className="fab fa-linkedin-in"></i>
-                  </a>
-                  <a className="mx-1 p-1" href="#">
-                    <i className="fab fa-instagram"></i>
-                  </a>
-                  <a className="mx-1 p-1" href="#">
-                    <i className="fab fa-youtube"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
+  const handlePrev = () => {
+    swiperRef.current.swiper.slidePrev();
+  };
+
+  const handleNext = () => {
+    swiperRef.current.swiper.slideNext();
+  };
+
+  const handleChange = (e) => {
+    setIsBeginning(e.isBeginning);
+    setIsEnd(e.isEnd);
+  };
+
+  const loadData = async (page) => {
+    try {
+      const resp = await getFeaturedBooks(page, 10, "name", "ASC");
+      const {
+        content,
+        numberOfElements,
+        size,
+        totalElements,
+        totalPages,
+        pageable,
+      } = resp.data;
+
+      setBooks(content);
+
+      setPagination({
+        numberOfElements,
+        size,
+        totalElements,
+        totalPages,
+        pageable,
+      });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+      console.log(books);
+    }
+  };
+
+  useEffect(() => {
+    loadData(0);
+  }, []);
+
+  return (
+    <div className="swiper">
+      <div className="swiper-wrapper">
+        <Container className="swiper-slide">
+          <div
+            className={`arrow ${isBeginning ? "passive" : ""}`}
+            onClick={handlePrev}
+          >
+            <IoIosArrowDropleft />
           </div>
-        </div>
+          <Swiper
+            onSlideChange={handleChange}
+            ref={swiperRef}
+            breakpoints={{
+              0: {
+                spaceBetween: 10,
+                slidesPerView: 1,
+              },
+              576: {
+                spaceBetween: 20,
+                slidesPerView: 2,
+              },
+              768: {
+                spaceBetween: 20,
+                slidesPerView: 3,
+              },
+              992: {
+                spaceBetween: 20,
+                slidesPerView: 5,
+              },
+              1200: {
+                spaceBetween: 20,
+                slidesPerView: 5,
+              },
+            }}
+          >
+            {books.map((book, index) => (
+              <SwiperSlide key={index}>
+                <div className="swiper-cont">
+                  <div className="container py-2">
+                    <div className="owl-carousel team-carousel position-relative">
+                      <div className="team-item">
+                        <img
+                          className="img-fluid"
+                          src={require(`../../../${book.imageLink}`)}
+                          alt=""
+                        />
+                        <div className="bg-light text-center p-2">
+                          <h5 className="mb-3">{book.name}</h5>
+                          <p className="mb-2">{book.bookAuthor.name}</p>
+                          <div className="d-flex justify-content-center">
+                            {book.publishDate}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <div
+            className={`arrow ${isEnd ? "passive" : ""}`}
+            onClick={handleNext}
+          >
+            <IoIosArrowDropright />
+          </div>
+        </Container>
       </div>
+      <div className="swiper-button-next"></div>
+      <div className="swiper-button-prev"></div>
     </div>
   );
 };
