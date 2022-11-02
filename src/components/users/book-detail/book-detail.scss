@@ -1,0 +1,20 @@
+@use "../../../assets/scss/variables" as v;
+
+.book-image-container {
+    padding-left:1rem;
+    text-align: center;
+
+    .book-image{
+        width:80%;
+        margin: 0;
+        padding:0;
+    }
+
+}
+
+.book-information {
+    width:70%;
+    background-color: #301808;
+    box-shadow:0 0 20px yellow;
+    
+}
