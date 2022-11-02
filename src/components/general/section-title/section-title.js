@@ -3,7 +3,7 @@ import "./section-title.scss";
 const SectionTitle = ({ title }) => {
   return (
     <div className="section-title">
-      <h2>{title}</h2>
+      <span className="animate-character">{title}</span>
     </div>
   );
 };

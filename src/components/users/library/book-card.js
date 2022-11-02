@@ -8,16 +8,16 @@ const BookCard = (props) => {
         href="detail.html"
       >
         <img
-          className="img-fluid"
+          className="img-fluid rounded"
           src={require(`../../../${props.imageLink}`)}
           alt="book_image"
         />
         <div className="courses-text">
-          <h4 className="text-center text-white px-3">{props.name}</h4>
+          <h4 className="text-center text-white px-3"> {props.name}</h4>
           <div className="border-top w-100 mt-3">
             <div className="d-flex justify-content-between p-4">
               <span className="text-white">
-                <i className="fa fa-user mr-2"></i>
+                <i className="fa fa-user mr-2"></i>&nbsp;
                 {props.bookAuthor.name}
               </span>
               <span className="text-white">
