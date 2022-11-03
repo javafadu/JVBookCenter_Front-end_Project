@@ -1,22 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Dropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import secureLocalStorage from "react-secure-storage";
+import { logout } from "../../../../store/slices/auth-slice";
+import { question } from "../../../../utils/functions/swal";
+import "./user-menu.scss";
 
 const UserMenu = () => {
-  const { isUserLogin, user } = useState(false);
-  //   const dispatch = useDispatch();
+  const { isUserLogin, user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  /*     const handleLogout = () => {
-      question("Are you sure to logout?").then((result) => {
-        if (result.isConfirmed) {
-          dispatch(logout());
-          secureLocalStorage.removeItem("token");
-          navigate("/");
-        }
-      });
-    }; */
+  const handleLogout = () => {
+    question("Are you sure to logout?").then((result) => {
+      if (result.isConfirmed) {
+        dispatch(logout());
+        secureLocalStorage.removeItem("token");
+        navigate("/");
+      }
+    });
+  };
 
   return (
     <div className="user-menu">
@@ -40,9 +44,9 @@ const UserMenu = () => {
               Profile
             </Dropdown.Item>
             <Dropdown.Item as={Link} to="/user/reservations">
-              Reservations
+              My Loaned Books
             </Dropdown.Item>
-            <Dropdown.Item>Logout</Dropdown.Item>
+            <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       ) : (

@@ -69,14 +69,14 @@ const Footer = () => {
                   <Loading />
                 ) : (
                   books.map((book, index) => (
-                    <Link
+                    <a
                       className="text-white-50 mb-2"
-                      to={`book-detail/?id=${book[0]}`}
+                      href={`book-detail/?id=${book[0]}`}
                       key={index}
                     >
                       <i className="fa fa-angle-right mr-2"></i>&nbsp;
                       {book[1]}
-                    </Link>
+                    </a>
                   ))
                 )}
               </div>
@@ -88,14 +88,14 @@ const Footer = () => {
                   <Loading />
                 ) : (
                   categories.map((category, index) => (
-                    <Link
+                    <a
                       className="text-white-50 mb-2"
-                      to={`library?cat=${category[0]}&type=${category[1]}`}
+                      href={`../library?cat=${category[0]}&type=${category[1]}`}
                       key={index}
                     >
                       <i className="fa fa-angle-right mr-2"></i>&nbsp;
                       {category[1]}
-                    </Link>
+                    </a>
                   ))
                 )}
               </div>
@@ -108,14 +108,14 @@ const Footer = () => {
                   <Loading />
                 ) : (
                   authors.map((author, index) => (
-                    <Link
+                    <a
                       className="text-white-50 mb-2"
-                      to={`library?author=${author[0]}&type=${author[1]}`}
+                      href={`../library?author=${author[0]}&type=${author[1]}`}
                       key={index}
                     >
                       <i className="fa fa-angle-right mr-2"></i>&nbsp;
                       {author[1]}
-                    </Link>
+                    </a>
                   ))
                 )}
               </div>

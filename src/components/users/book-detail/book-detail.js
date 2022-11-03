@@ -4,6 +4,7 @@ import { useLocation, useSearchParams } from "react-router-dom";
 import { getBookWithId } from "../../../api/book-service";
 import SectionTitle from "../../general/section-title/section-title";
 import "./book-detail.scss";
+import SameCategoryBooks from "./same-category-books";
 
 const BookDetail = (props) => {
   const location = useLocation();
@@ -124,6 +125,14 @@ const BookDetail = (props) => {
           </Col>
         </Row>
       </Container>
+      <div className="same-cat-books-title">
+        <h3>Other Books in This Category</h3>
+      </div>
+      {loading ? (
+        ""
+      ) : (
+        <SameCategoryBooks cat={book.bookCategory?.id} bookId={book.id} />
+      )}
     </>
   );
 };
