@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Alert, Col, Container, Row } from "react-bootstrap";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { getBookWithId } from "../../../api/book-service";
 import SectionTitle from "../../general/section-title/section-title";
@@ -108,11 +108,16 @@ const BookDetail = (props) => {
               </div>
             </div>
 
-            <div className="book-information">
+            <div
+              className={`book-information ${
+                book.loanable ? "available" : "not-available"
+              }`}
+            >
               <div className="d-flex justify-content-between border-bottom px-4">
                 <h6 className=" my-3">
                   {book.loanable ? "Available" : "Not Available"}
                 </h6>
+
                 <h6 className=" my-3">Shelf Code: {book.shelfCode}</h6>
               </div>
             </div>
