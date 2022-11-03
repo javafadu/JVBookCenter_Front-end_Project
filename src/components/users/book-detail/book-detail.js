@@ -42,7 +42,7 @@ const BookDetail = (props) => {
       <Container>
         <Row>
           <Col md={6}>
-            <div>
+            <div className="book-image-container">
               <div className="wrapper">
                 <div className="book">
                   <div className="inner-book">
