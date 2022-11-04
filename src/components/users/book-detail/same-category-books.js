@@ -112,39 +112,41 @@ const SameCategoryBooks = (props) => {
                 },
               }}
             >
-              {books.filter(book => book.id != props.bookId).map((book, index) => (
-                <SwiperSlide key={index}>
-                  <div className="swiper-cont">
-                    <div className="container py-2">
-                      <div className="owl-carousel team-carousel position-relative">
-                        <a
-                          className="feature-books-link"
-                          href={`./book-detail/?id=${book.id}`}
-                        >
-                          <div className="team-item">
-                            <img
-                              className="img-fluid rounded"
-                              src={require(`../../../${book.imageLink}`)}
-                              alt=""
-                            />
-                            <div className="bg-light text-center p-2">
-                              <div className="book-title">
-                                <h5 className="mb-3">{book.name}</h5>
-                              </div>
-                              <div className="book-author">
-                                <p className="mb-2">{book.bookAuthor.name}</p>
-                              </div>
-                              <div className="d-flex justify-content-center">
-                                {book.publishDate}
+              {books
+                .filter((book) => book.id != props.bookId)
+                .map((book, index) => (
+                  <SwiperSlide key={index}>
+                    <div className="swiper-cont">
+                      <div className="container py-2">
+                        <div className="owl-carousel team-carousel position-relative">
+                          <a
+                            className="feature-books-link"
+                            href={`../book-detail/?id=${book.id}`}
+                          >
+                            <div className="team-item">
+                              <img
+                                className="img-fluid rounded"
+                                src={require(`../../../${book.imageLink}`)}
+                                alt=""
+                              />
+                              <div className="bg-light text-center p-2">
+                                <div className="book-title">
+                                  <h5 className="mb-3">{book.name}</h5>
+                                </div>
+                                <div className="book-author">
+                                  <p className="mb-2">{book.bookAuthor.name}</p>
+                                </div>
+                                <div className="d-flex justify-content-center">
+                                  {book.publishDate}
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </a>
+                          </a>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </SwiperSlide>
-              ))}
+                  </SwiperSlide>
+                ))}
             </Swiper>
             <div
               className={`arrow ${isEnd ? "passive" : ""}`}

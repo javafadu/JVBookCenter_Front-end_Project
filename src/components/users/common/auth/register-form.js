@@ -14,24 +14,38 @@ const RegisterForm = ({ setDefaultTab }) => {
   const initialValues = {
     firstName: "",
     lastName: "",
-    phoneNumber: "",
     address: "",
-    zipCode: "",
+    phone: "",
+    birthDate: "",
     email: "",
     password: "",
     confirmPassword: "",
   };
 
   const validationSchema = Yup.object({
-    firstName: Yup.string().required("Please enter your first name"),
-    lastName: Yup.string().required("Please enter your last name"),
-    phoneNumber: Yup.string().required(),
-    address: Yup.string().required("Please enter your address"),
-    zipCode: Yup.string().required("Please enter your zip code"),
-    email: Yup.string().email().required("Please enter your email"),
+    firstName: Yup.string()
+      .min(3, "Too short")
+      .max(30, "Too Long")
+      .required("Please enter your first name"),
+    lastName: Yup.string()
+      .min(3, "Too short")
+      .max(30, "Too Long")
+      .required("Please enter your last name"),
+    address: Yup.string()
+      .min(10, "Too short")
+      .max(100, "Too Long")
+      .required("Please enter your address"),
+    phone: Yup.string().required(),
+    birthDate: Yup.string(),
+    email: Yup.string()
+      .min(10, "Too short")
+      .max(100, "Too Long")
+      .email()
+      .required("Please enter your email"),
     password: Yup.string()
       .required("Please enter your password")
-      .min(8, "Must be at least 8 characters")
+      .min(5, "Must be at least 5 characters")
+      .max(15, "Must be max 15 characters")
       .matches(/[a-z]+/, "One lowercase character")
       .matches(/[A-Z]+/, "One uppercase character")
       .matches(/[@$!%*#?&]+/, "One special character")
@@ -87,20 +101,7 @@ const RegisterForm = ({ setDefaultTab }) => {
           {formik.errors.lastName}
         </Form.Control.Feedback>
       </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label>Phone Number</Form.Label>
-        <Form.Control
-          type="text"
-          as={InputMask}
-          mask="(999) 999-9999"
-          {...formik.getFieldProps("phoneNumber")}
-          isInvalid={formik.touched.phoneNumber && formik.errors.phoneNumber}
-          isValid={formik.touched.phoneNumber && !formik.errors.phoneNumber}
-        />
-        <Form.Control.Feedback type="invalid">
-          {formik.errors.phoneNumber}
-        </Form.Control.Feedback>
-      </Form.Group>
+
       <Form.Group className="mb-3">
         <Form.Label>Address</Form.Label>
         <Form.Control
@@ -113,11 +114,29 @@ const RegisterForm = ({ setDefaultTab }) => {
           {formik.errors.address}
         </Form.Control.Feedback>
       </Form.Group>
+
       <Form.Group className="mb-3">
-        <Form.Label>Zip Code</Form.Label>
+        <Form.Label>Phone Number</Form.Label>
         <Form.Control
           type="text"
-          {...formik.getFieldProps("zipCode")}
+          as={InputMask}
+          mask="999-999-9999"
+          {...formik.getFieldProps("phone")}
+          isInvalid={formik.touched.phoneNumber && formik.errors.phoneNumber}
+          isValid={formik.touched.phoneNumber && !formik.errors.phoneNumber}
+        />
+        <Form.Control.Feedback type="invalid">
+          {formik.errors.phoneNumber}
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label>Birth Date (MM/DD/YYYY)</Form.Label>
+        <Form.Control
+          type="text"
+          as={InputMask}
+          mask="99/99/9999"
+          {...formik.getFieldProps("birthDate")}
           isInvalid={formik.touched.zipCode && formik.errors.zipCode}
           isValid={formik.touched.zipCode && !formik.errors.zipCode}
         />

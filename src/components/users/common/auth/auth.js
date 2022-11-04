@@ -21,7 +21,7 @@ const Auth = () => {
     <Container fluid className="auth">
       <Row>
         <Col lg={7}>
-          <img src={logo} alt="TRVLCar" />
+          <img src={logo} alt="book_center" />
           <div className="toolbar">
             <RiCloseCircleLine onClick={() => navigate(-1)} />{" "}
             {/* Tıklandığında bir önceki sayfaya yönlendirir */}

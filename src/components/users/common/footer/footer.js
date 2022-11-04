@@ -71,7 +71,7 @@ const Footer = () => {
                   books.map((book, index) => (
                     <a
                       className="text-white-50 mb-2"
-                      href={`book-detail/?id=${book[0]}`}
+                      href={`../book-detail/?id=${book[0]}`}
                       key={index}
                     >
                       <i className="fa fa-angle-right mr-2"></i>&nbsp;
