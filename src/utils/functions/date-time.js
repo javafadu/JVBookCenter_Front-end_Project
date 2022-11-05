@@ -37,3 +37,7 @@ export const checkDates = (dates) => {
 export const formatDateTimeToLLL = (dateTime) => {
   return moment(dateTime).format("lll");
 };
+
+export const formatDateLibrary = (dateTime) => {
+  return moment(dateTime).format("Do MMMM YYYY");
+};
