@@ -21,7 +21,7 @@ export const updateAuthUser = (user) => {
 };
 
 export const updateAuthPassword = (passwords) => {
-  return axios.patch(`${API_URL}/user/auth`, passwords, {
+  return axios.patch(`${API_URL}/auth`, passwords, {
     headers: authHeader(),
   });
 };

@@ -38,6 +38,7 @@ export const getFilteredBooks = (
   );
 };
 
+/* Get A book with Id */
 export const getBookWithId = (id) => {
   return axios.get(`${API_URL}/books/${id}`);
 };

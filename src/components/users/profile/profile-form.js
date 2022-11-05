@@ -58,81 +58,84 @@ const ProfileForm = ({ user }) => {
   });
 
   return (
-    <Form noValidate onSubmit={formik.handleSubmit}>
-      <Form.Group className="mb-3">
-        <Form.Label>First Name</Form.Label>
-        <Form.Control
-          type="text"
-          {...formik.getFieldProps("firstName")}
-          isInvalid={formik.touched.firstName && formik.errors.firstName}
-          isValid={formik.touched.firstName && !formik.errors.firstName}
-        />
-        <Form.Control.Feedback type="invalid">
-          {formik.errors.firsName}
-        </Form.Control.Feedback>
-      </Form.Group>
+    <>
+      <h2>User Information</h2><br/>
+      <Form noValidate onSubmit={formik.handleSubmit}>
+        <Form.Group className="mb-3">
+          <Form.Label>First Name</Form.Label>
+          <Form.Control
+            type="text"
+            {...formik.getFieldProps("firstName")}
+            isInvalid={formik.touched.firstName && formik.errors.firstName}
+            isValid={formik.touched.firstName && !formik.errors.firstName}
+          />
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.firsName}
+          </Form.Control.Feedback>
+        </Form.Group>
 
-      <Form.Group className="mb-3">
-        <Form.Label>Last Name</Form.Label>
-        <Form.Control
-          type="text"
-          {...formik.getFieldProps("lastName")}
-          isInvalid={formik.touched.lastName && formik.errors.lastName}
-          isValid={formik.touched.lastName && !formik.errors.lastName}
-        />
-        <Form.Control.Feedback type="invalid">
-          {formik.errors.lastName}
-        </Form.Control.Feedback>
-      </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Last Name</Form.Label>
+          <Form.Control
+            type="text"
+            {...formik.getFieldProps("lastName")}
+            isInvalid={formik.touched.lastName && formik.errors.lastName}
+            isValid={formik.touched.lastName && !formik.errors.lastName}
+          />
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.lastName}
+          </Form.Control.Feedback>
+        </Form.Group>
 
-      <Form.Group className="mb-3">
-        <Form.Label>Address</Form.Label>
-        <Form.Control
-          type="text"
-          {...formik.getFieldProps("address")}
-          isInvalid={formik.touched.address && formik.errors.address}
-          isValid={formik.touched.address && !formik.errors.address}
-        />
-        <Form.Control.Feedback type="invalid">
-          {formik.errors.address}
-        </Form.Control.Feedback>
-      </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Address</Form.Label>
+          <Form.Control
+            type="text"
+            {...formik.getFieldProps("address")}
+            isInvalid={formik.touched.address && formik.errors.address}
+            isValid={formik.touched.address && !formik.errors.address}
+          />
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.address}
+          </Form.Control.Feedback>
+        </Form.Group>
 
-      <Form.Group className="mb-3">
-        <Form.Label>Phone Number</Form.Label>
-        <Form.Control
-          type="text"
-          as={ReactInputMask}
-          mask="999-999-9999"
-          {...formik.getFieldProps("phone")}
-          isInvalid={formik.touched.phone && formik.errors.phone}
-          isValid={formik.touched.phone && !formik.errors.phone}
-        />
-        <Form.Control.Feedback type="invalid">
-          {formik.errors.phone}
-        </Form.Control.Feedback>
-      </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Phone Number</Form.Label>
+          <Form.Control
+            type="text"
+            as={ReactInputMask}
+            mask="999-999-9999"
+            {...formik.getFieldProps("phone")}
+            isInvalid={formik.touched.phone && formik.errors.phone}
+            isValid={formik.touched.phone && !formik.errors.phone}
+          />
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.phone}
+          </Form.Control.Feedback>
+        </Form.Group>
 
-      <Form.Group className="mb-3">
-        <Form.Label>Birth Date (MM/DD/YYYY)</Form.Label>
-        <Form.Control
-          type="text"
-          as={ReactInputMask}
-          mask="99/99/9999"
-          {...formik.getFieldProps("birthDate")}
-          isInvalid={formik.touched.birthDate && formik.errors.birthDate}
-          isValid={formik.touched.birthDate && !formik.errors.birthDate}
-        />
-        <Form.Control.Feedback type="invalid">
-          {formik.errors.birthDate}
-        </Form.Control.Feedback>
-      </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Birth Date (YYYY-MM-DD)</Form.Label>
+          <Form.Control
+            type="text"
+            as={ReactInputMask}
+            mask="9999-99-99"
+            {...formik.getFieldProps("birthDate")}
+            isInvalid={formik.touched.birthDate && formik.errors.birthDate}
+            isValid={formik.touched.birthDate && !formik.errors.birthDate}
+          />
+          <Form.Control.Feedback type="invalid">
+            {formik.errors.birthDate}
+          </Form.Control.Feedback>
+        </Form.Group>
 
-      <Button variant="primary" type="submit" disabled={loading}>
-        {loading && <Spinner animation="border" size="sm" />}
-        Update
-      </Button>
-    </Form>
+        <Button variant="primary" type="submit" disabled={loading}>
+          {loading && <Spinner animation="border" size="sm" />}
+          Update
+        </Button>
+      </Form>
+    </>
   );
 };
 

@@ -131,11 +131,11 @@ const RegisterForm = ({ setDefaultTab }) => {
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label>Birth Date (MM/DD/YYYY)</Form.Label>
+        <Form.Label>Birth Date (YYYY-MM-DD)</Form.Label>
         <Form.Control
           type="text"
           as={InputMask}
-          mask="99/99/9999"
+          mask="9999-99-99"
           {...formik.getFieldProps("birthDate")}
           isInvalid={formik.touched.zipCode && formik.errors.zipCode}
           isValid={formik.touched.zipCode && !formik.errors.zipCode}

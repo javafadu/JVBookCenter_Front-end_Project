@@ -1,7 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "../components/general/scroll-to-top/scroll-to-top";
 import BookDetail from "../components/users/book-detail/book-detail";
+import PasswordForm from "../components/users/profile/password-form";
+import Profile from "../components/users/profile/profile";
+import ProfileForm from "../components/users/profile/profile-form";
+import MyBooks from "../components/users/profile/my-books";
 import NotFoundPage from "../pages/common/not-found-page";
 import UnauthorizedPage from "../pages/common/unauthorized-page";
 import AuthPage from "../pages/users/auth-page";
@@ -13,6 +18,8 @@ import UserTemplate from "../templates/user-template";
 import ProtectedRoute from "./protected-route";
 
 const CustomRoutes = () => {
+  const user = useSelector((state) => state.auth.user);
+
   return (
     <BrowserRouter>
       <ScrollToTop></ScrollToTop>
@@ -76,6 +83,45 @@ const CustomRoutes = () => {
                 <ProtectedRoute>
                   <UserTemplate>
                     <ProfilePage />
+                  </UserTemplate>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="my-profile"
+              element={
+                <ProtectedRoute>
+                  <UserTemplate>
+                    <Profile>
+                      <ProfileForm user={user} />
+                    </Profile>
+                  </UserTemplate>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="my-account"
+              element={
+                <ProtectedRoute>
+                  <UserTemplate>
+                    <Profile>
+                      <PasswordForm />
+                    </Profile>
+                  </UserTemplate>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="my-books"
+              element={
+                <ProtectedRoute>
+                  <UserTemplate>
+                    <Profile>
+                      <MyBooks user={user} />
+                    </Profile>
                   </UserTemplate>
                 </ProtectedRoute>
               }

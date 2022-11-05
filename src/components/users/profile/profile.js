@@ -1,27 +1,20 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { FaUserCircle } from "react-icons/fa";
-import { useSelector } from "react-redux";
-import PasswordForm from "./password-form";
-import ProfileForm from "./profile-form";
+import UserSideBar from "./sidebar/user-sidebar";
 
-const Profile = () => {
-  const user = useSelector((state) => state.auth.user);
+const Profile = (props) => {
+  const { children } = props;
+
   return (
-    <Container>
+    <Container fluid className="p-0 overflow-hidden">
       <Row>
-        <Col>
-          <FaUserCircle size="120" />
-          <h4>{`${user.firstName} ${user.lastName}`}</h4>
-          <p>{user.email}</p>
+        <Col lg={3}>
+          <UserSideBar />
         </Col>
-        <Col>
-          <h3>Update Profile</h3>
-          <ProfileForm user={user} />
-        </Col>
-        <Col>
-          <h3>Update Passeord</h3>
-          <PasswordForm />
+        <Col lg={9}>
+          <Container className="pt-5">
+            <div className="px-5">{children}</div>
+          </Container>
         </Col>
       </Row>
     </Container>

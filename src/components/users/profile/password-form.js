@@ -46,48 +46,52 @@ const PasswordForm = () => {
     onSubmit,
   });
   return (
-    <Form noValidate onSubmit={formik.handleSubmit}>
-      <Form.Group className="mb-3">
-        <Form.Label>Current Password</Form.Label>
-        <PasswordInput
-          {...formik.getFieldProps("oldPassword")}
-          isInvalid={formik.touched.oldPassword && formik.errors.oldPassword}
-          isvalid={formik.touched.oldPassword && !formik.errors.oldPassword}
-          error={formik.errors.oldPassword}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label>New Password</Form.Label>
-        <PasswordInput
-          {...formik.getFieldProps("newPassword")}
-          isInvalid={formik.touched.newPassword && formik.errors.newPassword}
-          isvalid={formik.touched.newPassword && !formik.errors.newPassword}
-          error={formik.errors.newPassword}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label>Password Confirm</Form.Label>
-        <PasswordInput
-          {...formik.getFieldProps("confirmNewPassword")}
-          isInvalid={
-            formik.touched.confirmNewPassword &&
-            formik.errors.confirmNewPassword
-          }
-          isvalid={
-            formik.touched.confirmNewPassword &&
-            !formik.errors.confirmNewPassword
-          }
-          error={formik.errors.confirmNewPassword}
-        />
-      </Form.Group>
-      <Button
-        variant="primary"
-        type="submit"
-        disabled={!(formik.dirty && formik.isValid) || loading}
-      >
-        {loading && <Spinner animation="border" size="sm" />} Update
-      </Button>
-    </Form>
+    <>
+      <h2>Account Information</h2>
+      <br />
+      <Form noValidate onSubmit={formik.handleSubmit}>
+        <Form.Group className="mb-3">
+          <Form.Label>Current Password</Form.Label>
+          <PasswordInput
+            {...formik.getFieldProps("oldPassword")}
+            isInvalid={formik.touched.oldPassword && formik.errors.oldPassword}
+            isvalid={formik.touched.oldPassword && !formik.errors.oldPassword}
+            error={formik.errors.oldPassword}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>New Password</Form.Label>
+          <PasswordInput
+            {...formik.getFieldProps("newPassword")}
+            isInvalid={formik.touched.newPassword && formik.errors.newPassword}
+            isvalid={formik.touched.newPassword && !formik.errors.newPassword}
+            error={formik.errors.newPassword}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Password Confirm</Form.Label>
+          <PasswordInput
+            {...formik.getFieldProps("confirmNewPassword")}
+            isInvalid={
+              formik.touched.confirmNewPassword &&
+              formik.errors.confirmNewPassword
+            }
+            isvalid={
+              formik.touched.confirmNewPassword &&
+              !formik.errors.confirmNewPassword
+            }
+            error={formik.errors.confirmNewPassword}
+          />
+        </Form.Group>
+        <Button
+          variant="primary"
+          type="submit"
+          disabled={!(formik.dirty && formik.isValid) || loading}
+        >
+          {loading && <Spinner animation="border" size="sm" />} Update
+        </Button>
+      </Form>
+    </>
   );
 };
 export default PasswordForm;
