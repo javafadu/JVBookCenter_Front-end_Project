@@ -14,7 +14,6 @@ const ProfileForm = ({ user }) => {
   const [year, month, day] = user.birthDate.split("-");
   const birthDateFormat = [month, day, year].join("/");
   console.log(birthDateFormat);
-  
 
   const initialValues = {
     firstName: user.firstName,
@@ -119,7 +118,7 @@ const ProfileForm = ({ user }) => {
         <Form.Control
           type="text"
           as={ReactInputMask}
-          mask="99/99/9999""
+          mask="99/99/9999"
           {...formik.getFieldProps("birthDate")}
           isInvalid={formik.touched.birthDate && formik.errors.birthDate}
           isValid={formik.touched.birthDate && !formik.errors.birthDate}
