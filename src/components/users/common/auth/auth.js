@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Card, Col, Container, Row, Tab, Tabs } from "react-bootstrap";
 import "./auth.scss";
-import logo from "../../../../assets/img/logo.png";
 import { RiCloseCircleLine, RiHome7Line } from "react-icons/ri";
+import { BsFillPeopleFill } from "react-icons/bs";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import LoginForm from "./login-form";
 import RegisterForm from "./register-form";
@@ -20,31 +20,34 @@ const Auth = () => {
   return (
     <Container fluid className="auth">
       <Row>
-        <Col lg={7}>
-          <img src={logo} alt="book_center" />
+        <Col>
           <div className="toolbar">
             <RiCloseCircleLine onClick={() => navigate(-1)} />{" "}
             {/* Tıklandığında bir önceki sayfaya yönlendirir */}
             <RiHome7Line onClick={() => navigate("/")} />
           </div>
-        </Col>
-        <Col lg={5}>
-          <Card>
-            <Card.Body>
-              <Tabs
-                activeKey={defaultTab}
-                onSelect={(k) => setDefaultTab(k)}
-                className="mb-3"
-              >
-                <Tab eventKey="login" title="Login">
-                  <LoginForm />
-                </Tab>
-                <Tab eventKey="register" title="Register">
-                  <RegisterForm setDefaultTab={setDefaultTab} />
-                </Tab>
-              </Tabs>
-            </Card.Body>
-          </Card>
+          <div className="form-area">
+            <Card>
+              <Card.Body>
+                <Card.Title className="title-icon">
+                  <BsFillPeopleFill />
+                </Card.Title>
+
+                <Tabs
+                  activeKey={defaultTab}
+                  onSelect={(k) => setDefaultTab(k)}
+                  className="form-items mb-3"
+                >
+                  <Tab eventKey="login" title="Login">
+                    <LoginForm />
+                  </Tab>
+                  <Tab eventKey="register" title="Register">
+                    <RegisterForm setDefaultTab={setDefaultTab} />
+                  </Tab>
+                </Tabs>
+              </Card.Body>
+            </Card>
+          </div>
         </Col>
       </Row>
     </Container>

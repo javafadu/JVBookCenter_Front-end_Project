@@ -4,7 +4,6 @@
 .auth {
   div[class^="col"] {
     &:first-child {
-      min-height: 100vh;
       background-image: url("../../../../assets/img/login-bg.jpg");
       background-size: cover;
       background-position: top center;
@@ -25,7 +24,7 @@
 
       @media (max-width: 991px) {
         min-height: auto;
-        height: 100px;
+        
       }
     }
 
@@ -58,6 +57,48 @@
           color: white;
         }
       }
+    }
+
+    .form-area {
+      margin-top:1rem;
+      position:relative;
+      z-index: 23;
+
+      .card {
+        min-width: 60vw;
+
+        @media (min-width: 576px) {
+          min-width: 50vw;
+        }
+
+        @media (min-width: 767px) {
+          min-width: 40vw;
+        }
+
+        @media (min-width: 991px) {
+          min-width: 30vw;
+        }
+
+      }
+      .title-icon {
+        margin: auto;
+        width:50%;
+        align-items: center;
+        font-size: 4rem;
+        text-align: center;
+        position: relative;
+        float: top;
+        top:-60px;
+        border: 0.3rem outset v.$color5;
+        border-radius: 10px;
+        background-color: white;
+     
+        
+      }
+      .form-items {
+        margin-top:-2rem;
+      }
+    
     }
   }
 

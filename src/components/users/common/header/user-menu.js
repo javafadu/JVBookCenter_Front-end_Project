@@ -41,7 +41,7 @@ const UserMenu = () => {
             )}
 
             <Dropdown.Item as={Link} to="/user">
-              Profile
+              My Profile
             </Dropdown.Item>
             <Dropdown.Item as={Link} to="/user/reservations">
               My Loaned Books
