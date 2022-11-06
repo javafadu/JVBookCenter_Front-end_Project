@@ -33,7 +33,7 @@ const BookDetail = (props) => {
 
   return (
     <>
-      <div className="section-title position-relative mb-5">
+      <div className="section-title position-relative my-2 mb-5">
         <h1 className="display-4">
           <SectionTitle title={book.name} />
         </h1>
@@ -42,40 +42,16 @@ const BookDetail = (props) => {
 
       <Container>
         <Row>
-          <Col md={6}>
-            <div className="book-image-container">
-              <div className="wrapper">
-                <div className="book">
-                  <div className="inner-book">
-                    <div className="img">
-                      <img
-                        src={
-                          book.imageLink
-                            ? require(`../../../${book?.imageLink}`)
-                            : ""
-                        }
-                        alt={book.name}
-                        className="book-image img-fluid"
-                      />
-                    </div>
-
-                    <div className="page page-2"></div>
-                    <div className="page page-3"></div>
-                    <div className="page page-4"></div>
-                    <div className="page page-5"></div>
-                    <div className="img final-page">
-                      <img
-                        src={
-                          book.imageLink
-                            ? require(`../../../${book?.imageLink}`)
-                            : ""
-                        }
-                        alt={book.name}
-                        className="book-image img-fluid"
-                      />
-                    </div>
-                  </div>
-                </div>
+          <Col md={6} className="book-image-main">
+            <div className="book-container">
+              <div class="book">
+                <img
+                  src={
+                    book.imageLink ? require(`../../../${book?.imageLink}`) : ""
+                  }
+                  alt={book.name}
+                  className="img-fluid"
+                />
               </div>
             </div>
           </Col>
