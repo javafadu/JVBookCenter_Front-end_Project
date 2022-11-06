@@ -1,0 +1,25 @@
+@use "../../../assets/scss/mixins" as m;
+@use "../../../assets/scss/variables" as v;
+
+.contact-form {
+
+    padding: 20px 10px;
+    margin-bottom:20px;
+    border-radius: 1.2rem;
+    box-shadow: 1px 0px 5px black;
+
+    background-color: #e0d8d8;
+    label {
+        margin-left:2rem;
+        font-weight: 600;
+    }
+
+    .invalid-feedback {
+        margin-left:2rem;
+    }
+    
+    svg {
+        color: v.$color1;
+        font-size:1.5rem;
+    }
+}

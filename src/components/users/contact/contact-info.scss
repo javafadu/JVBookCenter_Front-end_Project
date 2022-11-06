@@ -1,0 +1,73 @@
+@use "../../../assets/scss/mixins" as m;
+@use "../../../assets/scss/variables" as v;
+
+.contact-main-bar {
+
+    margin-top:10px;
+    padding: 20px 10px;
+    
+
+    .contact-sub-bar {
+        border: 5px solid green;
+        border-radius: 1.5rem;
+        margin: 20px 20px;
+        padding-right:20px;
+        padding-bottom:20px;
+        padding-bottom:20px;
+        box-shadow: 1px 2px 5px black;
+    }
+
+    .box-icon {
+        font-size: 4.5rem;
+        color: v.$color1;
+        text-align: center;
+    }
+
+    .box-title {
+        text-align: center;
+        font-weight: 600;
+        font-size: 2rem;
+        margin:0;
+        padding:0;
+    }
+    .box-content {
+        text-align: center;
+        font-weight: 500;
+        font-size: 1rem;
+        margin:0;
+        padding:0;
+    }
+
+}
+
+.contact-main-container {
+
+    padding: 20px 10px;
+
+    .contact-sub-container {
+        margin: auto;
+        justify-content:center;
+    
+    }
+
+}
+
+.contact-info-box {
+    background-color: v.$color5;
+    padding:15px;
+    border-radius: 1.2rem;
+    box-shadow: 1px 0px 5px black;
+    
+    
+    .contact-info-text1 {
+        font-weight:bold ;
+        font-size:1.5rem;
+        
+    }
+    .contact-info-text2 {
+        font-size: 1.1rem;
+    }
+    
+}
+
+
