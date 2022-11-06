@@ -3,10 +3,10 @@ import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "./sidebar.scss";
 import { useSelector } from "react-redux";
-import { FaUserCircle } from "react-icons/fa";
+import { BsFillPeopleFill } from "react-icons/bs";
+import { TbBooks } from "react-icons/tb";
 import {
   RiUser3Line,
-  RiCarLine,
   RiLogoutCircleRLine,
   RiDashboardLine,
 } from "react-icons/ri";
@@ -14,6 +14,7 @@ import { logout } from "../../../../store/slices/auth-slice";
 import { question } from "../../../../utils/functions/swal";
 import secureLocalStorage from "react-secure-storage";
 import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 const UserSideBar = () => {
   const user = useSelector((state) => state.auth.user);
@@ -31,26 +32,36 @@ const UserSideBar = () => {
     });
   };
 
+  const isActive = {
+    fontWeight: "bold",
+    color: "rgba(255, 255, 255, 0.1)",
+  };
+
   return (
     <Navbar bg="light" expand="lg" className="user-sidebar" variant="dark">
       <Container>
-        <FaUserCircle size="120" />
-        <h4>{`${user.firstName} ${user.lastName}`}</h4>
-        <p>{user.email}</p>
+        <div className="title-icon">
+          <BsFillPeopleFill />
+        </div>
+        <div className="title-text">
+          <h4>{`${user.firstName} ${user.lastName}`}</h4>
+          <p>{user.email}</p>
+        </div>
+
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/user/my-profile">
+            <NavLink as={Link} to="/user/my-profile" activeStyle={isActive}>
               <RiDashboardLine /> User Information
-            </Nav.Link>
-            <Nav.Link as={Link} to="/user/my-account">
+            </NavLink>
+            <NavLink as={Link} to="/user/my-account" activeStyle={isActive}>
               <RiUser3Line /> Account Information
-            </Nav.Link>
-            <Nav.Link as={Link} to="/user/my-books">
-              <RiCarLine /> My Books
-            </Nav.Link>
+            </NavLink>
+            <NavLink as={Link} to="/user/my-books" activeStyle={isActive}>
+              <TbBooks /> My Books
+            </NavLink>
 
-            <Nav.Link onClick={handleLogout}>
+            <Nav.Link onClick={handleLogout} activeStyle={isActive}>
               <RiLogoutCircleRLine /> Logout
             </Nav.Link>
           </Nav>

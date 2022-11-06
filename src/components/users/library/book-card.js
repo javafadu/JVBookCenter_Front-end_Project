@@ -1,4 +1,6 @@
 import React from "react";
+import loanable from "../../../assets/img/loanable-sm.png";
+import notLoanable from "../../../assets/img/not-loanable-sm.png";
 
 const BookCard = (props) => {
   return (
@@ -12,6 +14,14 @@ const BookCard = (props) => {
           src={require(`../../../${props.imageLink}`)}
           alt="book_image"
         />
+        <div className="loanable-status">
+          {" "}
+          {props.loanable ? (
+            <img src={loanable} alt="" className="img-fluid" />
+          ) : (
+            <img src={notLoanable} alt="" className="img-fluid" />
+          )}
+        </div>
         <div className="courses-text">
           <h4 className="text-center text-white px-3"> {props.name}</h4>
           <div className="border-top w-100 mt-3">

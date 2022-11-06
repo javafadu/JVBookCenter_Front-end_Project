@@ -1,8 +1,14 @@
 @use "../../../../assets/scss/mixins" as m;
 @use "../../../../assets/scss/variables" as v;
 
-.user-sidebar {
 
+ .navbar .active {
+  font-weight: bold;
+  color: red;
+}
+
+
+.user-sidebar {
 
     padding: 2rem !important;
     @media (min-width: 992px) {
@@ -10,6 +16,26 @@
         height: 100vh;
         align-items: flex-start !important;
         
+      }
+
+      .title-icon {
+        margin: auto;
+        width:50%;
+        align-items: left;
+        font-size: 4rem;
+        text-align: center;
+        position: relative;
+        float: top;
+        border: 0.3rem outset v.$color1;
+        border-radius: 10px;
+        background-color: white;
+        margin-bottom:1rem;
+      }
+
+      .title-text {
+        width:100%;
+        align-items: center;
+        text-align: center !important;
       }
 
 

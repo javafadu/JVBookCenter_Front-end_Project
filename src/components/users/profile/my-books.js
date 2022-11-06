@@ -4,6 +4,7 @@ import { getAuthLoanedBooks } from "../../../api/loan-service";
 import { Container, Row, Col, Pagination } from "react-bootstrap";
 import { formatDateLibrary } from "../../../utils/functions/date-time";
 import Loading from "../../general/loading/loading";
+import { CgCalendarDates } from "react-icons/cg";
 import "./my-books.scss";
 
 const MyBooks = () => {
@@ -72,16 +73,38 @@ const MyBooks = () => {
                 </Col>
                 <Col md={11}>
                   <Row>
-                    <h2>{loan.book.name}</h2>
+                    <a href={`../book-detail/?id=${loan.book.id}`}>
+                      <h2>{loan.book.name}</h2>
+                    </a>
                   </Row>
                   <Row>
                     <Col md={5}>
-                      Loan Date : {formatDateLibrary(loan.loanDate)}
+                      Loan Date <CgCalendarDates />{" "}
+                      <span className="loan-date">
+                        {" "}
+                        {formatDateLibrary(loan.loanDate)}
+                      </span>
                     </Col>
                     <Col md={6}>
-                      {loan.returnDate == null
-                        ? `Expire Date: ${formatDateLibrary(loan.expireDate)}`
-                        : `Return Date : ${loan.returnDate} `}
+                      {loan.returnDate == null ? (
+                        <>
+                          <span>
+                            Expire Date <CgCalendarDates />{" "}
+                          </span>
+                          <span className="expire-date">
+                            {formatDateLibrary(loan.expireDate)}
+                          </span>
+                        </>
+                      ) : (
+                        <>
+                          <span>
+                            Return Date <CgCalendarDates />{" "}
+                          </span>
+                          <span className="return-date">
+                            {formatDateLibrary(loan.returnDate)}
+                          </span>
+                        </>
+                      )}
                     </Col>
                   </Row>
                 </Col>

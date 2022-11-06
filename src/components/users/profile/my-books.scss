@@ -3,6 +3,15 @@
 .loans-pagination {
     padding-top: 2rem;
     padding-left:2rem;
-   
-    
+}
+.loan-date, .return-date{
+    color:green;
+}
+.expire-date {
+    color:red;
+}
+
+a {
+    text-decoration: none !important;
+    color:black !important;
 }
