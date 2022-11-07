@@ -22,8 +22,6 @@ const UserMenu = () => {
     });
   };
 
-  console.log(user.roles);
-
   return (
     <div className="user-menu">
       {isUserLogin ? (
@@ -33,7 +31,8 @@ const UserMenu = () => {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            {user.roles.includes("Administrator") && (
+            {(user.roles.includes("Administrator") ||
+              user.roles.includes("Staff")) && (
               <>
                 <Dropdown.Item as={Link} to="/admin">
                   Admin Panel

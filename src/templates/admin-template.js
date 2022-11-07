@@ -8,10 +8,10 @@ const AdminTemplate = (props) => {
   return (
     <Container fluid className="p-0 overflow-hidden">
       <Row>
-        <Col lg={3}>
+        <Col lg={2}>
           <AdminSideBar />
         </Col>
-        <Col lg={9}>
+        <Col lg={10}>
           <Container className="pt-5">{children}</Container>
         </Col>
       </Row>

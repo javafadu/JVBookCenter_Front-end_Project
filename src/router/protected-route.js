@@ -7,8 +7,16 @@ const ProtectedRoute = ({ children, admin }) => {
 
   if (!isUserLogin) return <Navigate to="/auth" />;
 
-  if (admin && !user.roles.includes("Administrator"))
+  const management = ["Administrator", "Staff"];
+
+  const multipleExist = async () =>
+    management.every((value) => {
+      return multipleExist.includes(value);
+    });
+
+  if (!multipleExist) {
     return <Navigate to="/unauthorized" />;
+  }
 
   return children;
 };

@@ -18,6 +18,12 @@ import UserTemplate from "../templates/user-template";
 import ProtectedRoute from "./protected-route";
 import AdminTemplate from "../templates/admin-template";
 import AdminDashboardPage from "../pages/admin/admin-dashboard-page";
+import AdminBooksPage from "../pages/admin/admin-books-page";
+import AdminAuthorsPage from "../pages/admin/admin-authors-page";
+import AdminPublishersPage from "../pages/admin/admin-publishers-page";
+import AdminCategoriesPage from "../pages/admin/admin-categories-page";
+import AdminUsersPage from "../pages/admin/admin-users-page";
+import AdminReportsPage from "../pages/admin/admin-reports-page";
 
 const CustomRoutes = () => {
   const user = useSelector((state) => state.auth.user);
@@ -137,6 +143,72 @@ const CustomRoutes = () => {
                 <ProtectedRoute admin={true}>
                   <AdminTemplate>
                     <AdminDashboardPage />
+                  </AdminTemplate>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="books"
+              element={
+                <ProtectedRoute admin={true}>
+                  <AdminTemplate>
+                    <AdminBooksPage />
+                  </AdminTemplate>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="authors"
+              element={
+                <ProtectedRoute admin={true}>
+                  <AdminTemplate>
+                    <AdminAuthorsPage />
+                  </AdminTemplate>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="publishers"
+              element={
+                <ProtectedRoute admin={true}>
+                  <AdminTemplate>
+                    <AdminPublishersPage />
+                  </AdminTemplate>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="categories"
+              element={
+                <ProtectedRoute admin={true}>
+                  <AdminTemplate>
+                    <AdminCategoriesPage />
+                  </AdminTemplate>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="users"
+              element={
+                <ProtectedRoute admin={true}>
+                  <AdminTemplate>
+                    <AdminUsersPage />
+                  </AdminTemplate>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="reports"
+              element={
+                <ProtectedRoute admin={true}>
+                  <AdminTemplate>
+                    <AdminReportsPage />
                   </AdminTemplate>
                 </ProtectedRoute>
               }

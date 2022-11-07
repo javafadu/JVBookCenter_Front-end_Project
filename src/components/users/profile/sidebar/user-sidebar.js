@@ -32,11 +32,6 @@ const UserSideBar = () => {
     });
   };
 
-  const isActive = {
-    fontWeight: "bold",
-    color: "rgba(255, 255, 255, 0.1)",
-  };
-
   return (
     <Navbar bg="light" expand="lg" className="user-sidebar" variant="dark">
       <Container>
@@ -51,17 +46,17 @@ const UserSideBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <NavLink as={Link} to="/user/my-profile" activeStyle={isActive}>
+            <NavLink as={Link} to="/user/my-profile" activeStyle>
               <RiDashboardLine /> User Information
             </NavLink>
-            <NavLink as={Link} to="/user/my-account" activeStyle={isActive}>
+            <NavLink as={Link} to="/user/my-account" activeStyle>
               <RiUser3Line /> Account Information
             </NavLink>
-            <NavLink as={Link} to="/user/my-books" activeStyle={isActive}>
+            <NavLink as={Link} to="/user/my-books" activeStyle>
               <TbBooks /> My Books
             </NavLink>
 
-            <Nav.Link onClick={handleLogout} activeStyle={isActive}>
+            <Nav.Link onClick={handleLogout} activeStyle>
               <RiLogoutCircleRLine /> Logout
             </Nav.Link>
           </Nav>

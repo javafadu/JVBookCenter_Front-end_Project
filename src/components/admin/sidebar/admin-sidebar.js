@@ -4,7 +4,17 @@ import { question } from "../../../utils/functions/swal";
 import secureLocalStorage from "react-secure-storage";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../store/slices/auth-slice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import adminIcon from "../../../assets/img/find_user.png";
+import { AiFillDashboard, AiFillPieChart } from "react-icons/ai";
+import { ImBooks } from "react-icons/im";
+import { BsFillPersonLinesFill } from "react-icons/bs";
+import { SiAffinitypublisher } from "react-icons/si";
+import { MdCategory } from "react-icons/md";
+import { FaUsersCog, FaGlobe } from "react-icons/fa";
+import { RiLogoutBoxRFill } from "react-icons/ri";
+import { Container, Nav, Navbar, NavLink } from "react-bootstrap";
+import { RiLogoutCircleRLine } from "react-icons/ri";
 
 const AdminSidebar = () => {
   const { isUserLogin, user } = useSelector((state) => state.auth);
@@ -22,77 +32,53 @@ const AdminSidebar = () => {
   };
 
   return (
-    <div id="wrapper">
-      <nav className="navbar navbar-default navbar-cls-top " role="navigation">
-        <div className="navbar-header">
-          <button
-            type="button"
-            className="navbar-toggle"
-            data-toggle="collapse"
-            data-target=".sidebar-collapse"
-          >
-            <span className="sr-only">Toggle navigation</span>
-            <span className="icon-bar"></span>
-            <span className="icon-bar"></span>
-            <span className="icon-bar"></span>
-          </button>
-          <a className="navbar-brand" href="index.html">
-            Binary admin
-          </a>
-        </div>
-      </nav>
+    <>
+      <Navbar bg="light" expand="lg" className="user-sidebar" variant="dark">
+        <Container>
+          <div className="title-icon">
+            <img src={adminIcon} alt="" className="img-fluid" />
+          </div>
+          <div className="title-text">
+            <h4>{`${user.firstName} ${user.lastName}`}</h4>
+            <p>{user.roles}</p>
+          </div>
 
-      <nav className="navbar-default navbar-side" role="navigation">
-        <div className="sidebar-collapse">
-          <ul className="nav" id="main-menu">
-            <li className="text-center">
-              <img
-                src={require(`../../../assets/img/find_user.png`)}
-                className="user-image img-responsive"
-                alt=""
-              />
-            </li>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <NavLink as={Link} to="/admin" activeStyle>
+                <AiFillDashboard /> Dashboard
+              </NavLink>
+              <NavLink as={Link} to="/admin/books" activeStyle>
+                <ImBooks /> Books
+              </NavLink>
+              <NavLink as={Link} to="/admin/authors" activeStyle>
+                <BsFillPersonLinesFill /> Authors
+              </NavLink>
+              <NavLink as={Link} to="/admin/publishers" activeStyle>
+                <SiAffinitypublisher /> Publishers
+              </NavLink>
+              <NavLink as={Link} to="/admin/categories" activeStyle>
+                <MdCategory /> Categories
+              </NavLink>
+              <NavLink as={Link} to="/admin/users" activeStyle>
+                <FaUsersCog /> Users
+              </NavLink>
+              <NavLink as={Link} to="/admin/reports" activeStyle>
+                <AiFillPieChart /> Report
+              </NavLink>
+              <NavLink as={Link} to="/" activeStyle>
+                <FaGlobe /> Website
+              </NavLink>
 
-            <li>
-              <a className="active-menu" href="index.html">
-                <i className="fa fa-dashboard fa-3x"></i> Dashboard
-              </a>
-            </li>
-            <li>
-              <a href="ui.html">
-                <i className="fa fa-desktop fa-3x"></i> UI Elements
-              </a>
-            </li>
-            <li>
-              <a href="tab-panel.html">
-                <i className="fa fa-qrcode fa-3x"></i> Tabs & Panels
-              </a>
-            </li>
-            <li>
-              <a href="chart.html">
-                <i className="fa fa-bar-chart-o fa-3x"></i> Morris Charts
-              </a>
-            </li>
-            <li>
-              <a href="table.html">
-                <i className="fa fa-table fa-3x"></i> Table Examples
-              </a>
-            </li>
-            <li>
-              <a href="form.html">
-                <i className="fa fa-edit fa-3x"></i> Forms{" "}
-              </a>
-            </li>
-
-            <li>
-              <a href="blank.html">
-                <i className="fa fa-square-o fa-3x"></i> Blank Page
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
+              <Nav.Link onClick={handleLogout} activeStyle>
+                <RiLogoutCircleRLine /> Logout
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </>
   );
 };
 
