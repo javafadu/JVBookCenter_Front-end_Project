@@ -16,6 +16,8 @@ import LibraryPage from "../pages/users/library-page";
 import ProfilePage from "../pages/users/profile-page";
 import UserTemplate from "../templates/user-template";
 import ProtectedRoute from "./protected-route";
+import AdminTemplate from "../templates/admin-template";
+import AdminDashboardPage from "../pages/admin/admin-dashboard-page";
 
 const CustomRoutes = () => {
   const user = useSelector((state) => state.auth.user);
@@ -123,6 +125,19 @@ const CustomRoutes = () => {
                       <MyBooks user={user} />
                     </Profile>
                   </UserTemplate>
+                </ProtectedRoute>
+              }
+            />
+          </Route>
+
+          <Route path="admin">
+            <Route
+              index
+              element={
+                <ProtectedRoute admin={true}>
+                  <AdminTemplate>
+                    <AdminDashboardPage />
+                  </AdminTemplate>
                 </ProtectedRoute>
               }
             />

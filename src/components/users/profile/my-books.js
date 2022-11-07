@@ -16,8 +16,7 @@ const MyBooks = () => {
 
   const loadData = async (page) => {
     try {
-      const resp = await getAuthLoanedBooks(page, 2);
-      console.log(resp.data);
+      const resp = await getAuthLoanedBooks(page, 4);
 
       const {
         content,

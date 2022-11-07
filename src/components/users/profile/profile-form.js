@@ -11,10 +11,6 @@ const ProfileForm = ({ user }) => {
   const [loading, setLoading] = useState(false);
   /* const dispatch = useDispatch(); */
 
-  const [year, month, day] = user.birthDate.split("-");
-  const birthDateFormat = [month, day, year].join("/");
-  console.log(birthDateFormat);
-
   const initialValues = {
     firstName: user.firstName,
     lastName: user.lastName,
@@ -59,7 +55,8 @@ const ProfileForm = ({ user }) => {
 
   return (
     <>
-      <h2>User Information</h2><br/>
+      <h2>User Information</h2>
+      <br />
       <Form noValidate onSubmit={formik.handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>First Name</Form.Label>

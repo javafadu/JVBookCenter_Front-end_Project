@@ -22,6 +22,8 @@ const UserMenu = () => {
     });
   };
 
+  console.log(user.roles);
+
   return (
     <div className="user-menu">
       {isUserLogin ? (

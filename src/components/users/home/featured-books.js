@@ -52,7 +52,6 @@ const FeaturedBooks = () => {
       console.log(err);
     } finally {
       setLoading(false);
-      console.log(books);
     }
   };
 
