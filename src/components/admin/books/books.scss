@@ -1,0 +1,33 @@
+@use "../../../assets/scss/variables" as v;
+
+.admin-books-page {
+    width:80%;
+}
+
+
+.breadcrumb-box {
+    display:block;
+    padding: 0;
+    height: 3rem;
+    background-color: v.$color2;
+    padding-top:0.8rem;
+    padding-left:2rem;
+    
+    
+}
+
+.search-box {
+    display:block;
+    padding: 0;
+    height: 6rem;
+    background-color: v.$color3;
+    padding-top:0.8rem;
+  
+}
+
+.book-list-container {
+    display:block;
+
+    width: 80%; 
+    height:auto;
+}

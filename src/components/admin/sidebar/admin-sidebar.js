@@ -40,38 +40,40 @@ const AdminSidebar = () => {
           </div>
           <div className="title-text">
             <h4>{`${user.firstName} ${user.lastName}`}</h4>
-            <p>{user.roles}</p>
+            <p>
+              {user.roles[0]} {user.roles[1]} {user.roles[2]}
+            </p>
           </div>
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <NavLink as={Link} to="/admin" activeStyle>
+              <NavLink as={Link} to="/admin">
                 <AiFillDashboard /> Dashboard
               </NavLink>
-              <NavLink as={Link} to="/admin/books" activeStyle>
+              <NavLink as={Link} to="/admin/books" >
                 <ImBooks /> Books
               </NavLink>
-              <NavLink as={Link} to="/admin/authors" activeStyle>
+              <NavLink as={Link} to="/admin/authors">
                 <BsFillPersonLinesFill /> Authors
               </NavLink>
-              <NavLink as={Link} to="/admin/publishers" activeStyle>
+              <NavLink as={Link} to="/admin/publishers" >
                 <SiAffinitypublisher /> Publishers
               </NavLink>
-              <NavLink as={Link} to="/admin/categories" activeStyle>
+              <NavLink as={Link} to="/admin/categories">
                 <MdCategory /> Categories
               </NavLink>
-              <NavLink as={Link} to="/admin/users" activeStyle>
+              <NavLink as={Link} to="/admin/users">
                 <FaUsersCog /> Users
               </NavLink>
-              <NavLink as={Link} to="/admin/reports" activeStyle>
+              <NavLink as={Link} to="/admin/reports">
                 <AiFillPieChart /> Report
               </NavLink>
-              <NavLink as={Link} to="/" activeStyle>
+              <NavLink as={Link} to="/">
                 <FaGlobe /> Website
               </NavLink>
 
-              <Nav.Link onClick={handleLogout} activeStyle>
+              <Nav.Link onClick={handleLogout}>
                 <RiLogoutCircleRLine /> Logout
               </Nav.Link>
             </Nav>

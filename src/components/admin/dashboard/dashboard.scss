@@ -1,0 +1,31 @@
+.item-container {
+    margin: 1rem 2rem;
+    
+    .item-content {
+        display: flex;
+        flex-direction:row;
+        justify-content:space-between;
+        height:80px;
+        width: 95%;
+        gap:1rem;
+        margin:0;
+        padding:0;
+    
+        .item-text {
+            padding:0;
+            height:95%;
+            font-size:3rem;
+            text-align: left;
+            text-align: center;
+        }
+        .item-icon {
+            color: gray;
+            opacity: 0.5;
+            text-align: right;
+            padding-right: 1rem;
+        }
+    
+    }
+    
+}
+
