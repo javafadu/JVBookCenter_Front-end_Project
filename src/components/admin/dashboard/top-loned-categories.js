@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getTopBooks } from "../../../api/book-service";
+import { getTopCategories } from "../../../api/category-service";
 import {
   BarChart,
   Bar,
@@ -12,14 +12,14 @@ import {
 } from "recharts";
 import Loading from "../../general/loading/loading";
 
-const TopLoanedBooks = () => {
-  const [books, setBooks] = useState([]);
+const TopLoanedCategories = () => {
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const loadData = async () => {
-    const resp = await getTopBooks(10);
+    const resp = await getTopCategories(10);
 
-    setBooks(resp.data);
+    setCategories(resp.data);
     setLoading(false);
   };
 
@@ -27,40 +27,37 @@ const TopLoanedBooks = () => {
     loadData(0);
   }, []);
 
-  let bookObje = {
+  let categoryObje = {
     id: 0,
-    bookName: "",
-    isbn: "",
+    categoryName: "",
     count: 0,
   };
 
-  function arr2obj(books) {
-    let booksArray = [];
-    for (let i = 0; i < books.length; i++) {
+  function arr2obj(categories) {
+    let categoriesArray = [];
+    for (let i = 0; i < categories.length; i++) {
       // Extract the key and the value
-      booksArray[i] = {
-        id: books[i][0],
-        bookName: books[i][1],
-        isbn: books[i][2],
-        count: books[i][3],
+      categoriesArray[i] = {
+        id: categories[i][0],
+        categoryName: categories[i][1],
+        count: categories[i][2],
       };
     }
 
     // Return the object
-    return booksArray;
+    return categoriesArray;
   }
-
-
 
   return (
     <>
-      <h3>Top Books</h3>
+      <h3>Top Categories</h3>
+
       {loading ? (
         <Loading />
       ) : (
         <ResponsiveContainer width="95%" height={300}>
           <BarChart
-            data={arr2obj(books)}
+            data={arr2obj(categories)}
             margin={{
               top: 5,
               right: 30,
@@ -69,7 +66,7 @@ const TopLoanedBooks = () => {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="bookName" angle={-35} offset={5} interval={0} />
+            <XAxis dataKey="categoryName" angle={-35} offset={5} interval={0} />
             <YAxis />
             <Tooltip />
             <Legend />
@@ -81,4 +78,4 @@ const TopLoanedBooks = () => {
   );
 };
 
-export default TopLoanedBooks;
+export default TopLoanedCategories;

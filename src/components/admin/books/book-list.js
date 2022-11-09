@@ -50,10 +50,8 @@ const BookList = () => {
   };
 
   useEffect(() => {
-    loadData(0);
+    searchQ ? loadData(0) : setLoading(false);
   }, []);
-
-  console.log(books);
 
   return (
     <>
@@ -65,7 +63,7 @@ const BookList = () => {
             <Row>
               <Row key={index}>
                 <Col md={1}>
-                  <a href={`../book-detail/?id=${book.id}`}>
+                  <a href={`./book-edit/?id=${book.id}&bookName=${book.name}`}>
                     <img
                       src={
                         book.imageLink
@@ -80,7 +78,11 @@ const BookList = () => {
 
                 <Col md={10}>
                   <Row>
-                    <h2>{book.name}</h2>
+                    <a
+                      href={`./book-edit/?id=${book.id}&bookName=${book.name}`}
+                    >
+                      <h2>{book.name}</h2>
+                    </a>
                   </Row>
                   <Row>
                     <Col>{book.bookAuthor.name}</Col>

@@ -13,13 +13,11 @@ const BookDetail = (props) => {
 
   const [loading, setLoading] = useState(true);
   const [book, setBook] = useState({});
-  const [imgLink, setImgLink] = useState("");
 
   const loadData = async () => {
     try {
       const resp = await getBookWithId(bookId);
       setBook(resp.data);
-      setImgLink(`../../../${resp.data?.imageLink}`);
     } catch (err) {
       console.log(err);
     } finally {

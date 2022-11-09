@@ -12,6 +12,8 @@ import { generalReport } from "../../../api/report-service";
 import Loading from "../../general/loading/loading";
 import Spacer from "../../general/spacer/spacer";
 import TopLoanedBooks from "./top-loned-books";
+import TopLoanedCategories from "./top-loned-categories";
+import TopLoanedAuthors from "./top-loned-authors";
 
 const Dashboard = () => {
   const [report, serReport] = useState({});
@@ -198,10 +200,18 @@ const Dashboard = () => {
           </Row>
         )}
       </Container>
-
+      <hr></hr>
       <Spacer height={20} />
 
       <TopLoanedBooks />
+      <hr></hr>
+      <Spacer height={20} />
+
+      <TopLoanedCategories />
+      <hr></hr>
+      <Spacer height={20} />
+
+      <TopLoanedAuthors />
     </>
   );
 };

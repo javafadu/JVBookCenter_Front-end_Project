@@ -17,16 +17,11 @@
 }
 
 .search-box {
-    display:flex;
-    flex-direction:row;
-    justify-content:space-between;
-    gap:0;
+    display:block;
     padding: 0;
     height: 6rem;
     background-color: v.$color3;
     padding-top:0.8rem;
-
-
   
 }
 

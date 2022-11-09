@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./books.scss";
+import { BsSearch } from "react-icons/bs";
 
 const SearchBar = () => {
   const [input, setInput] = useState("");
@@ -11,6 +12,11 @@ const SearchBar = () => {
     let path = `/admin/books?q=${input}`;
     navigate(path);
     window.location.reload();
+  };
+
+  const handleSubmitBookAdd = () => {
+    let path = `/admin/book-add`;
+    navigate(path);
   };
 
   return (
@@ -32,15 +38,23 @@ const SearchBar = () => {
             }
           }}
         />
-        <div className="input-group-append">
+        <div>
           <button
             disabled={isButtonDisabled}
             type="submit"
             value="Submit"
-            className="btn btn-primary"
+            className="btn btn-info my-2 mx-0"
             onClick={handleSubmit}
           >
-            Search
+            <BsSearch />
+          </button>
+          <button
+            type="submit"
+            value="Submit"
+            className="btn btn-primary my-2  mx-3"
+            onClick={handleSubmitBookAdd}
+          >
+            Add New Book
           </button>
         </div>
       </div>

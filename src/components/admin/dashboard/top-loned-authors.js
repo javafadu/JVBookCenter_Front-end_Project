@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getTopBooks } from "../../../api/book-service";
+import { getTopAuthors } from "../../../api/author-service";
 import {
   BarChart,
   Bar,
@@ -12,14 +12,14 @@ import {
 } from "recharts";
 import Loading from "../../general/loading/loading";
 
-const TopLoanedBooks = () => {
-  const [books, setBooks] = useState([]);
+const TopLoanedAuthors = () => {
+  const [authors, setAuthors] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const loadData = async () => {
-    const resp = await getTopBooks(10);
+    const resp = await getTopAuthors(10);
 
-    setBooks(resp.data);
+    setAuthors(resp.data);
     setLoading(false);
   };
 
@@ -27,40 +27,38 @@ const TopLoanedBooks = () => {
     loadData(0);
   }, []);
 
-  let bookObje = {
+  let authorObje = {
     id: 0,
-    bookName: "",
-    isbn: "",
+    authorName: "",
     count: 0,
   };
 
-  function arr2obj(books) {
-    let booksArray = [];
-    for (let i = 0; i < books.length; i++) {
+  function arr2obj(authors) {
+    let authorsArray = [];
+    for (let i = 0; i < authors.length; i++) {
       // Extract the key and the value
-      booksArray[i] = {
-        id: books[i][0],
-        bookName: books[i][1],
-        isbn: books[i][2],
-        count: books[i][3],
+      authorsArray[i] = {
+        id: authors[i][0],
+        authorName: authors[i][1],
+        count: authors[i][2],
       };
     }
 
     // Return the object
-    return booksArray;
+    return authorsArray;
   }
-
 
 
   return (
     <>
-      <h3>Top Books</h3>
+      <h3>Top Authors</h3>
+
       {loading ? (
         <Loading />
       ) : (
         <ResponsiveContainer width="95%" height={300}>
           <BarChart
-            data={arr2obj(books)}
+            data={arr2obj(authors)}
             margin={{
               top: 5,
               right: 30,
@@ -69,7 +67,7 @@ const TopLoanedBooks = () => {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="bookName" angle={-35} offset={5} interval={0} />
+            <XAxis dataKey="authorName" angle={-35} offset={5} interval={0} />
             <YAxis />
             <Tooltip />
             <Legend />
@@ -81,4 +79,4 @@ const TopLoanedBooks = () => {
   );
 };
 
-export default TopLoanedBooks;
+export default TopLoanedAuthors;
