@@ -1,5 +1,6 @@
 import axios from "axios";
 import { settings } from "../utils/settings";
+import authHeader from "./auth-header";
 
 const API_URL = settings.apiURL;
 
@@ -41,4 +42,10 @@ export const getFilteredBooks = (
 /* Get A book with Id */
 export const getBookWithId = (id) => {
   return axios.get(`${API_URL}/books/${id}`);
+};
+
+export const createBook = (book) => {
+  return axios.post(`${API_URL}/books`, book, {
+    headers: authHeader(),
+  });
 };

@@ -17,6 +17,10 @@ export const getCurrentDate = () => {
   return moment().format("YYYY-MM-DD");
 };
 
+export const getCurrentYear = () => {
+  return moment().format("YYYY");
+};
+
 export const getDate = (dateTime) => {
   return moment(dateTime).format("YYYY-MM-DD");
 };

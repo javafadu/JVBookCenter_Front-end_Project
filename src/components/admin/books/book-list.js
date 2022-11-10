@@ -11,6 +11,7 @@ const BookList = () => {
   const [books, setBooks] = useState([]);
   const [pagination, setPagination] = useState({});
   const [loading, setLoading] = useState(true);
+  const [result, setResult] = useState("");
 
   let searchQ = "";
 
@@ -34,6 +35,9 @@ const BookList = () => {
       } = resp.data;
 
       setBooks(content);
+
+      if (numberOfElements === 0 && searchQ.length > 0)
+        setResult("No results for: " + searchQ);
 
       setPagination({
         numberOfElements,
@@ -59,6 +63,7 @@ const BookList = () => {
         <Loading />
       ) : (
         <Container className="book-list-container">
+          <h2>{result}</h2>
           {books.map((book, index) => (
             <Row>
               <Row key={index}>
