@@ -1,92 +1,62 @@
-import React, { useState, useRef } from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
+import React, { useEffect, useRef, useState } from "react";
+import InputMask from "react-input-mask-next";
 import {
   Form,
   Button,
+  Spinner,
   Row,
   Col,
   ButtonGroup,
   Badge,
-  Spinner,
 } from "react-bootstrap";
-import "./book-add.scss";
-import {
-  createBook
-} from "../../../api/book-service";
-import { toast } from "../../../utils/functions/swal";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { createBook } from "../../../api/book-service";
+import { toast } from "../../../utils/functions/swal";
+import "./book-add.scss";
+import { getAllAuthors } from "../../../api/author-service";
+import { getAllCategories } from "../../../api/category-service";
+import { getAllPublishers } from "../../../api/publisher-service";
 import { getCurrentYear } from "../../../utils/functions/date-time";
 
 const BookAddForm = () => {
-  const [imageSrc, setImageSrc] = useState("");
   const [loading, setLoading] = useState(false);
-  const fileImageRef = useRef();
   const navigate = useNavigate();
+  const [imageSrc, setImageSrc] = useState("");
 
-  const initialValues = {
-    name: "",
-    isbn: "",
-    pageCount: "",
-    bookAuthor: "",
-    bookPublisher: "",
-    publishDate: "",
-    bookCategory: "",
-    imageLink: "",
-    shelfCode: "",
-    featured: "",
-    image: "",
-  };
+  const fileImageRef = useRef();
 
-  const validationSchema = Yup.object({
-    name: Yup.string().required("Please enter a name"),
-    isbn: Yup.string().required("Please enter the isbn number"),
-    pageCount: Yup.number(),
-    bookAuthor: Yup.number().required("Please select an author"),
-    bookPublisher: Yup.number().required("Please select a publisher"),
-    publishDate: (Yup.number().typeError("Must be number").max =
-      getCurrentYear()),
-    bookCategory: Yup.number().required("Please select a category"),
-    imageLink: Yup.string(),
-    shelfCode: Yup.string().required("Please enter the shelf code"),
-    featured: Yup.boolean().oneOf([true], "Featured Book"),
-    image: Yup.mixed(),
-  });
+  const [categories, setCategories] = useState([]);
+  const [authors, setAuthors] = useState([]);
+  const [publishers, setPublishers] = useState([]);
+  const [imageFileName, setImageFileName] = useState("");
 
-  const onSubmit = async (values) => {
-    setLoading(true);
-
+  const loadData = async () => {
     try {
-      const formData = new FormData();
-      formData.append("file", values.image);
-
-
-
-      const payload = { ...values };
-      delete payload.image;
-
-      await createBook(payload);
-      toast("Book was registered", "successfully");
-      navigate(-1);
+      const resp = await getAllCategories();
+      setCategories(resp.data.content);
+      const resp2 = await getAllAuthors();
+      setAuthors(resp2.data.content);
+      const resp3 = await getAllPublishers();
+      setPublishers(resp3.data.content);
     } catch (err) {
       console.log(err);
-      toast(err.response.data.message, "error");
     } finally {
       setLoading(false);
     }
   };
 
-  const formik = useFormik({
-    initialValues,
-    validationSchema,
-    onSubmit,
-  });
+  useEffect(() => {
+    loadData();
+  }, []);
 
   const handleSelectImage = () => {
     fileImageRef.current.click();
   };
   const handleImageChange = () => {
     const file = fileImageRef.current.files[0];
+    setImageFileName(fileImageRef.current.files[0].name);
     if (!file) return;
 
     formik.setFieldValue("image", file);
@@ -100,10 +70,72 @@ const BookAddForm = () => {
     };
   };
 
-  const isError = (field) => {
-    return formik.touched[field] && formik.errors[field];
+  const initialValues = {
+    name: "",
+    isbn: "",
+    address: "",
+    phone: "",
+    birthDate: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   };
-  
+
+  const validationSchema = Yup.object({
+    name: Yup.string()
+      .min(2, "Too short")
+      .max(80, "Too Long")
+      .required("Please enter name of book"),
+    isbn: Yup.string()
+      .required()
+      .test(
+        "len",
+        "Must be exactly 5 characters",
+        (val) => val && val.toString().length === 17
+      ),
+    address: Yup.string()
+      .min(10, "Too short")
+      .max(100, "Too Long")
+      .required("Please enter your address"),
+    phone: Yup.string().required(),
+    birthDate: Yup.string(),
+    email: Yup.string()
+      .min(10, "Too short")
+      .max(100, "Too Long")
+      .email()
+      .required("Please enter your email"),
+    password: Yup.string()
+      .required("Please enter your password")
+      .min(5, "Must be at least 5 characters")
+      .max(15, "Must be max 15 characters")
+      .matches(/[a-z]+/, "One lowercase character")
+      .matches(/[A-Z]+/, "One uppercase character")
+      .matches(/[@$!%*#?&]+/, "One special character")
+      .matches(/\d+/, "One number"),
+    confirmPassword: Yup.string()
+      .required("Please re-enter your password")
+      .oneOf([Yup.ref("password")], "Password fields doesn't match"),
+  });
+
+  const onSubmit = async (values) => {
+    setLoading(true);
+    try {
+      const resp = await createBook(values);
+      toast("The book is registered successfully!", "success");
+      formik.resetForm();
+    } catch (err) {
+      toast(err.response.data.message, "error");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit,
+  });
+
   return (
     <Form noValidate onSubmit={formik.handleSubmit}>
       <Row>
@@ -128,125 +160,98 @@ const BookAddForm = () => {
             Select Image
           </Button>
         </Col>
+
         <Col xl={9}>
           <Row>
             <Form.Group as={Col} md={4} lg={3} className="mb-3">
-              <Form.Label>Model</Form.Label>
+              <Form.Label>Name of Book</Form.Label>
               <Form.Control
                 type="text"
-                {...formik.getFieldProps("model")}
-                className={isError("model") && "is-invalid"}
+                {...formik.getFieldProps("name")}
+                isInvalid={formik.touched.name && formik.errors.name}
+                isValid={formik.touched.name && !formik.errors.name}
               />
               <Form.Control.Feedback type="invalid">
-                {formik.errors.model}
+                {formik.errors.name}
               </Form.Control.Feedback>
             </Form.Group>
             <Form.Group as={Col} md={4} lg={3} className="mb-3">
-              <Form.Label>Doors</Form.Label>
+              <Form.Label>ISBN</Form.Label>
               <Form.Control
-                type="number"
-                {...formik.getFieldProps("doors")}
-                className={isError("doors") && "is-invalid"}
+                type="text"
+                as={InputMask}
+                mask="999-99-99999-99-9"
+                {...formik.getFieldProps("isbn")}
+                isInvalid={formik.touched.isbn && formik.errors.isbn}
+                isValid={formik.touched.isbn && !formik.errors.isbn}
               />
               <Form.Control.Feedback type="invalid">
-                {formik.errors.doors}
+                {formik.errors.isbn}
               </Form.Control.Feedback>
             </Form.Group>
+
             <Form.Group as={Col} md={4} lg={3} className="mb-3">
-              <Form.Label>Seats</Form.Label>
+              <Form.Label>Address</Form.Label>
               <Form.Control
-                type="number"
-                {...formik.getFieldProps("seats")}
-                className={isError("seats") && "is-invalid"}
+                type="text"
+                {...formik.getFieldProps("address")}
+                isInvalid={formik.touched.address && formik.errors.address}
+                isValid={formik.touched.address && !formik.errors.address}
               />
               <Form.Control.Feedback type="invalid">
-                {formik.errors.seats}
+                {formik.errors.address}
               </Form.Control.Feedback>
             </Form.Group>
+
             <Form.Group as={Col} md={4} lg={3} className="mb-3">
-              <Form.Label>Luggage</Form.Label>
+              <Form.Label>Phone Number</Form.Label>
               <Form.Control
-                type="number"
-                {...formik.getFieldProps("luggage")}
-                className={isError("luggage") && "is-invalid"}
+                type="text"
+                as={InputMask}
+                mask="999-999-9999"
+                {...formik.getFieldProps("phone")}
+                isInvalid={
+                  formik.touched.phoneNumber && formik.errors.phoneNumber
+                }
+                isValid={
+                  formik.touched.phoneNumber && !formik.errors.phoneNumber
+                }
               />
               <Form.Control.Feedback type="invalid">
-                {formik.errors.luggage}
+                {formik.errors.phoneNumber}
               </Form.Control.Feedback>
             </Form.Group>
+
             <Form.Group as={Col} md={4} lg={3} className="mb-3">
-              <Form.Label>Transmission</Form.Label>
-              <Form.Select
-                {...formik.getFieldProps("transmission")}
-                className={isError("transmission") && "is-invalid"}
-              >
-                <option>Select</option>
-                <option value="Automatic">Automatic</option>
-                <option value="Manuel">Manuel</option>
-                <option value="Tiptronic">Tiptronic</option>
-              </Form.Select>
-              <Form.Control.Feedback type="invalid">
-                {formik.errors.transmission}
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group as={Col} md={4} lg={3} className="mb-3">
-              <Form.Label>Air Conditioning</Form.Label>
-              <Form.Select
-                {...formik.getFieldProps("airConditioning")}
-                className={isError("airConditioning") && "is-invalid"}
-              >
-                <option>Select</option>
-                <option value={true}>Yes</option>
-                <option value={false}>No</option>
-              </Form.Select>
-              <Form.Control.Feedback type="invalid">
-                {formik.errors.airConditioning}
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group as={Col} md={4} lg={3} className="mb-3">
-              <Form.Label>Fuel Type</Form.Label>
-              <Form.Select
-                {...formik.getFieldProps("fuelType")}
-                className={isError("fuelType") && "is-invalid"}
-              >
-                <option>Select</option>
-                <option value="Electricity">Electricity</option>
-                <option value="Hybrid">Hybrid</option>
-                <option value="Gasoline">Gasoline</option>
-                <option value="Diesel">Diesel</option>
-                <option value="Hydrogen">Hydrogen</option>
-                <option value="LPG">LPG</option>
-                <option value="CNG">CNG</option>
-              </Form.Select>
-              <Form.Control.Feedback type="invalid">
-                {formik.errors.fuelType}
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group as={Col} md={4} lg={3} className="mb-3">
-              <Form.Label>Age</Form.Label>
+              <Form.Label>Birth Date (YYYY-MM-DD)</Form.Label>
               <Form.Control
-                type="number"
-                {...formik.getFieldProps("age")}
-                className={isError("age") && "is-invalid"}
+                type="text"
+                as={InputMask}
+                mask="9999-99-99"
+                {...formik.getFieldProps("birthDate")}
+                isInvalid={formik.touched.zipCode && formik.errors.zipCode}
+                isValid={formik.touched.zipCode && !formik.errors.zipCode}
               />
               <Form.Control.Feedback type="invalid">
-                {formik.errors.age}
+                {formik.errors.address}
               </Form.Control.Feedback>
             </Form.Group>
             <Form.Group as={Col} md={4} lg={3} className="mb-3">
-              <Form.Label>Price Per Hour</Form.Label>
+              <Form.Label>Email address</Form.Label>
               <Form.Control
-                type="number"
-                {...formik.getFieldProps("pricePerHour")}
-                className={isError("pricePerHour") && "is-invalid"}
+                type="email"
+                {...formik.getFieldProps("email")}
+                isInvalid={formik.touched.email && formik.errors.email}
+                isValid={formik.touched.email && !formik.errors.email}
               />
               <Form.Control.Feedback type="invalid">
-                {formik.errors.pricePerHour}
+                {formik.errors.email}
               </Form.Control.Feedback>
             </Form.Group>
           </Row>
         </Col>
       </Row>
+
       <div className="text-end">
         <ButtonGroup aria-label="Basic example">
           <Button variant="primary" type="submit" disabled={loading}>
@@ -264,5 +269,4 @@ const BookAddForm = () => {
     </Form>
   );
 };
-
-export default BookAddForm;;
+export default BookAddForm;
