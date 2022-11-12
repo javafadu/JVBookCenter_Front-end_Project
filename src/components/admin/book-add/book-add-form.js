@@ -73,7 +73,7 @@ const BookAddForm = () => {
   const initialValues = {
     name: "",
     isbn: "",
-    address: "",
+    pageCount: "",
     phone: "",
     birthDate: "",
     email: "",
@@ -90,14 +90,15 @@ const BookAddForm = () => {
       .required()
       .test(
         "len",
-        "Must be exactly 5 characters",
+        "Must be exactly 13 characters",
         (val) => val && val.toString().length === 17
       ),
+    pageCount: Yup.number().positive().integer(),
     address: Yup.string()
       .min(10, "Too short")
       .max(100, "Too Long")
       .required("Please enter your address"),
-    phone: Yup.string().required(),
+
     birthDate: Yup.string(),
     email: Yup.string()
       .min(10, "Too short")
@@ -191,15 +192,15 @@ const BookAddForm = () => {
             </Form.Group>
 
             <Form.Group as={Col} md={4} lg={3} className="mb-3">
-              <Form.Label>Address</Form.Label>
+              <Form.Label>Page Count</Form.Label>
               <Form.Control
-                type="text"
-                {...formik.getFieldProps("address")}
-                isInvalid={formik.touched.address && formik.errors.address}
-                isValid={formik.touched.address && !formik.errors.address}
+                type="number"
+                {...formik.getFieldProps("pageCount")}
+                isInvalid={formik.touched.pageCount && formik.errors.pageCount}
+                isValid={formik.touched.pageCount && !formik.errors.pageCount}
               />
               <Form.Control.Feedback type="invalid">
-                {formik.errors.address}
+                {formik.errors.pageCount}
               </Form.Control.Feedback>
             </Form.Group>
 
