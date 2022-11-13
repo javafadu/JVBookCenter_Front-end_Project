@@ -74,11 +74,9 @@ const BookAddForm = () => {
     name: "",
     isbn: "",
     pageCount: "",
-    phone: "",
-    birthDate: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    bookAuthor: "",
+    bookPublisher: "",
+    bookCategory: "",
   };
 
   const validationSchema = Yup.object({
@@ -88,37 +86,27 @@ const BookAddForm = () => {
       .required("Please enter name of book"),
     isbn: Yup.string()
       .required()
-      .test(
-        "len",
-        "Must be exactly 13 characters",
-        (val) => val && val.toString().length === 17
+      .matches(
+        /([0-9][0-9][0-9][-][0-9][0-9][-][0-9][0-9][0-9][0-9][0-9][-][0-9][0-9][-][0-9]$)/,
+        "Please enter a valid ISBN number"
       ),
-    pageCount: Yup.number().positive().integer(),
-    address: Yup.string()
-      .min(10, "Too short")
-      .max(100, "Too Long")
-      .required("Please enter your address"),
 
-    birthDate: Yup.string(),
-    email: Yup.string()
-      .min(10, "Too short")
-      .max(100, "Too Long")
-      .email()
-      .required("Please enter your email"),
-    password: Yup.string()
-      .required("Please enter your password")
-      .min(5, "Must be at least 5 characters")
-      .max(15, "Must be max 15 characters")
-      .matches(/[a-z]+/, "One lowercase character")
-      .matches(/[A-Z]+/, "One uppercase character")
-      .matches(/[@$!%*#?&]+/, "One special character")
-      .matches(/\d+/, "One number"),
-    confirmPassword: Yup.string()
-      .required("Please re-enter your password")
-      .oneOf([Yup.ref("password")], "Password fields doesn't match"),
+    pageCount: Yup.number().positive().integer(),
+    bookAuthor: Yup.number().positive().integer().required("Select an author"),
+    bookPublisher: Yup.number()
+      .positive()
+      .integer()
+      .required("Select a publisher"),
+
+    bookCategory: Yup.number()
+      .positive()
+      .integer()
+      .required("Select a category"),
+    imageLink: Yup.string(),
   });
 
   const onSubmit = async (values) => {
+    console.log(imageFileName);
     setLoading(true);
     try {
       const resp = await createBook(values);
@@ -205,50 +193,108 @@ const BookAddForm = () => {
             </Form.Group>
 
             <Form.Group as={Col} md={4} lg={3} className="mb-3">
-              <Form.Label>Phone Number</Form.Label>
+              <Form.Label>Publish Year</Form.Label>
               <Form.Control
-                type="text"
-                as={InputMask}
-                mask="999-999-9999"
-                {...formik.getFieldProps("phone")}
+                type="number"
+                {...formik.getFieldProps("publishDate")}
                 isInvalid={
-                  formik.touched.phoneNumber && formik.errors.phoneNumber
+                  formik.touched.publishDate && formik.errors.publishDate
                 }
                 isValid={
-                  formik.touched.phoneNumber && !formik.errors.phoneNumber
+                  formik.touched.publishDate && !formik.errors.publishDate
                 }
               />
               <Form.Control.Feedback type="invalid">
-                {formik.errors.phoneNumber}
+                {formik.errors.publishDate}
               </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group as={Col} md={4} lg={3} className="mb-3">
-              <Form.Label>Birth Date (YYYY-MM-DD)</Form.Label>
+              <Form.Label>Book Author</Form.Label>
+
               <Form.Control
-                type="text"
-                as={InputMask}
-                mask="9999-99-99"
-                {...formik.getFieldProps("birthDate")}
-                isInvalid={formik.touched.zipCode && formik.errors.zipCode}
-                isValid={formik.touched.zipCode && !formik.errors.zipCode}
-              />
+                as="select"
+                type="select"
+                {...formik.getFieldProps("bookAuthor")}
+                isInvalid={
+                  formik.touched.bookAuthor && formik.errors.bookAuthor
+                }
+                isValid={formik.touched.bookAuthor && !formik.errors.bookAuthor}
+              >
+                <option value={0}>Select</option>
+
+                {authors.map((author, index) => {
+                  return (
+                    <option value={author.id} key={index}>
+                      {author.name}
+                    </option>
+                  );
+                })}
+              </Form.Control>
               <Form.Control.Feedback type="invalid">
-                {formik.errors.address}
+                {formik.errors.bookAuthor}
               </Form.Control.Feedback>
             </Form.Group>
+
             <Form.Group as={Col} md={4} lg={3} className="mb-3">
-              <Form.Label>Email address</Form.Label>
+              <Form.Label>Book Publisher</Form.Label>
+
               <Form.Control
-                type="email"
-                {...formik.getFieldProps("email")}
-                isInvalid={formik.touched.email && formik.errors.email}
-                isValid={formik.touched.email && !formik.errors.email}
-              />
+                as="select"
+                type="select"
+                {...formik.getFieldProps("bookPublisher")}
+                isInvalid={
+                  formik.touched.bookPublisher && formik.errors.bookPublisher
+                }
+                isValid={
+                  formik.touched.bookPublisher && !formik.errors.bookPublisher
+                }
+              >
+                <option value={0}>Select</option>
+
+                {publishers.map((publisher, index) => {
+                  return (
+                    <option value={publisher.id} key={index}>
+                      {publisher.name}
+                    </option>
+                  );
+                })}
+              </Form.Control>
               <Form.Control.Feedback type="invalid">
-                {formik.errors.email}
+                {formik.errors.bookPublisher}
               </Form.Control.Feedback>
             </Form.Group>
+
+            <Form.Group as={Col} md={4} lg={3} className="mb-3">
+              <Form.Label>Book Category</Form.Label>
+
+              <Form.Control
+                as="select"
+                type="select"
+                {...formik.getFieldProps("bookCategory")}
+                isInvalid={
+                  formik.touched.bookCategory && formik.errors.bookCategory
+                }
+                isValid={
+                  formik.touched.bookCategory && !formik.errors.bookCategory
+                }
+              >
+                <option value={0}>Select</option>
+
+                {categories.map((category, index) => {
+                  return (
+                    <option value={category.id} key={index}>
+                      {category.name}
+                    </option>
+                  );
+                })}
+              </Form.Control>
+              <Form.Control.Feedback type="invalid">
+                {formik.errors.bookCategory}
+              </Form.Control.Feedback>
+            </Form.Group>
+
+            <input type="hidden" value="deneme" name="imageLink" />
           </Row>
         </Col>
       </Row>
