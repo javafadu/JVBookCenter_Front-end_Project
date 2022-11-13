@@ -31,6 +31,9 @@ const BookAddForm = () => {
   const [authors, setAuthors] = useState([]);
   const [publishers, setPublishers] = useState([]);
   const [imageFileName, setImageFileName] = useState("");
+  const [shelfCodeInput, setShelfCodeInput] = useState(false);
+
+  const [isFilePicked, setIsFilePicked] = useState(false);
 
   const loadData = async () => {
     try {
@@ -77,6 +80,8 @@ const BookAddForm = () => {
     bookAuthor: "",
     bookPublisher: "",
     bookCategory: "",
+    shelfCode: "",
+    featured: "",
   };
 
   const validationSchema = Yup.object({
@@ -102,14 +107,26 @@ const BookAddForm = () => {
       .positive()
       .integer()
       .required("Select a category"),
-    imageLink: Yup.string(),
+    shelfCode: Yup.string()
+      .required("Please enter name of book")
+      .matches(
+        /([A-Z][A-Z][-][0-9][0-9][0-9]$)/,
+        "Please use Upper Case for first letters"
+      ),
+    featured: Yup.bool().required("Please select"),
   });
 
   const onSubmit = async (values) => {
-    console.log(imageFileName);
-    setLoading(true);
     try {
-      const resp = await createBook(values);
+      setLoading(true);
+
+      const payload = { ...values };
+      delete payload.image;
+      payload.imageLink = imageFileName;
+
+      console.log(payload);
+
+      const resp = await createBook(payload);
       toast("The book is registered successfully!", "success");
       formik.resetForm();
     } catch (err) {
@@ -124,6 +141,14 @@ const BookAddForm = () => {
     validationSchema,
     onSubmit,
   });
+
+
+  // image upload codes
+
+
+
+  const handleSubmission = () => {
+	};
 
   return (
     <Form noValidate onSubmit={formik.handleSubmit}>
@@ -294,7 +319,39 @@ const BookAddForm = () => {
               </Form.Control.Feedback>
             </Form.Group>
 
-            <input type="hidden" value="deneme" name="imageLink" />
+            <Form.Group as={Col} md={4} lg={3} className="mb-3">
+              <Form.Label>Shelf Code</Form.Label>
+              <Form.Control
+                type="text"
+                as={InputMask}
+                mask="aa-999"
+                {...formik.getFieldProps("shelfCode")}
+                isInvalid={formik.touched.shelfCode && formik.errors.shelfCode}
+                isValid={formik.touched.shelfCode && !formik.errors.shelfCode}
+              />
+              <Form.Control.Feedback type="invalid">
+                {formik.errors.shelfCode}
+              </Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group as={Col} md={4} lg={3} className="mb-3">
+              <Form.Label>Featured</Form.Label>
+
+              <Form.Control
+                as="select"
+                type="select"
+                {...formik.getFieldProps("featured")}
+                isInvalid={formik.touched.featured && formik.errors.featured}
+                isValid={formik.touched.featured && !formik.errors.featured}
+              >
+                <option value={0}>Select</option>
+                <option value={true}>Featured</option>
+                <option value={false}>Not-Featured</option>
+              </Form.Control>
+              <Form.Control.Feedback type="invalid">
+                {formik.errors.featured}
+              </Form.Control.Feedback>
+            </Form.Group>
           </Row>
         </Col>
       </Row>
