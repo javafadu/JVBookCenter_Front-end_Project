@@ -20,20 +20,19 @@ import { getAllCategories } from "../../../api/category-service";
 import { getAllPublishers } from "../../../api/publisher-service";
 import { getCurrentYear } from "../../../utils/functions/date-time";
 
+import axios from "axios";
+
 const BookAddForm = () => {
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-  const [imageSrc, setImageSrc] = useState("");
 
+  const [imageSrc, setImageSrc] = useState("");
   const fileImageRef = useRef();
+  const navigate = useNavigate();
+  const [imageFileName, setImageFileName] = useState("");
 
   const [categories, setCategories] = useState([]);
   const [authors, setAuthors] = useState([]);
   const [publishers, setPublishers] = useState([]);
-  const [imageFileName, setImageFileName] = useState("");
-  const [shelfCodeInput, setShelfCodeInput] = useState(false);
-
-  const [isFilePicked, setIsFilePicked] = useState(false);
 
   const loadData = async () => {
     try {
@@ -53,25 +52,6 @@ const BookAddForm = () => {
   useEffect(() => {
     loadData();
   }, []);
-
-  const handleSelectImage = () => {
-    fileImageRef.current.click();
-  };
-  const handleImageChange = () => {
-    const file = fileImageRef.current.files[0];
-    setImageFileName(fileImageRef.current.files[0].name);
-    if (!file) return;
-
-    formik.setFieldValue("image", file);
-    //formik state ini manuel olarak set ettik.Seçilen dosyayı image alanına yerleştirdik.
-
-    const reader = new FileReader(); //Seçilen görüntüyü ekrana yerleştirdik
-    reader.readAsDataURL(file);
-
-    reader.onloadend = () => {
-      setImageSrc(reader.result);
-    };
-  };
 
   const initialValues = {
     name: "",
@@ -117,19 +97,30 @@ const BookAddForm = () => {
   });
 
   const onSubmit = async (values) => {
+    setLoading(true);
+
     try {
-      setLoading(true);
+      const formData = new FormData();
+      formData.append("file", values.image);
+      formData.delete("file", fileImageRef.current.files[0]);
+      formData.append("file", fileImageRef.current.files[0], imageFileName);
+
+      const response = await axios({
+        method: "post",
+        url: "http://192.168.1.171/books/",
+        data: formData,
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
       const payload = { ...values };
       delete payload.image;
+
       payload.imageLink = imageFileName;
-
-      console.log(payload);
-
       const resp = await createBook(payload);
       toast("The book is registered successfully!", "success");
-      formik.resetForm();
+      navigate(-1);
     } catch (err) {
+      console.log(err);
       toast(err.response.data.message, "error");
     } finally {
       setLoading(false);
@@ -142,16 +133,35 @@ const BookAddForm = () => {
     onSubmit,
   });
 
+  const handleSelectImage = () => {
+    fileImageRef.current.click();
+  };
+  const handleImageChange = () => {
+    const file = fileImageRef.current.files[0];
+    var filename = `${Math.random().toString(32).slice(2)}${
+      fileImageRef.current.files[0].name
+    }`;
 
-  // image upload codes
+    setImageFileName(filename);
+    if (!file) return;
 
+    formik.setFieldValue("image", file);
+    //formik state ini manuel olarak set ettik.Seçilen dosyayı image alanına yerleştirdik.
 
+    const reader = new FileReader(); //Seçilen görüntüyü ekrana yerleştirdik
+    reader.readAsDataURL(file);
 
-  const handleSubmission = () => {
-	};
+    reader.onloadend = () => {
+      setImageSrc(reader.result);
+    };
+  };
+
+  const isError = (field) => {
+    return formik.touched[field] && formik.errors[field];
+  };
 
   return (
-    <Form noValidate onSubmit={formik.handleSubmit}>
+    <Form noValidate onSubmit={formik.handleSubmit} className="px-2">
       <Row>
         <Col xl={3} className="image-area">
           <Form.Control
