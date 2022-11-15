@@ -21,6 +21,7 @@ import { getAllPublishers } from "../../../api/publisher-service";
 import { getCurrentYear } from "../../../utils/functions/date-time";
 
 import axios from "axios";
+import { imageUpload } from "../../../api/image-service";
 
 const BookAddForm = () => {
   const [loading, setLoading] = useState(false);
@@ -57,6 +58,7 @@ const BookAddForm = () => {
     name: "",
     isbn: "",
     pageCount: "",
+    publishDate: "",
     bookAuthor: "",
     bookPublisher: "",
     bookCategory: "",
@@ -105,12 +107,7 @@ const BookAddForm = () => {
       formData.delete("file", fileImageRef.current.files[0]);
       formData.append("file", fileImageRef.current.files[0], imageFileName);
 
-      const response = await axios({
-        method: "post",
-        url: "http://192.168.1.171/books/",
-        data: formData,
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const respImage = await imageUpload(formData);
 
       const payload = { ...values };
       delete payload.image;

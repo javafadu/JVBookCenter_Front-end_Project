@@ -49,3 +49,15 @@ export const createBook = (book) => {
     headers: authHeader(),
   });
 };
+
+export const updateBook = (bookId, book) => {
+  return axios.put(`${API_URL}/books/${bookId}`, book, {
+    headers: authHeader(),
+  });
+};
+
+export const deleteBook = (bookId) => {
+  return axios.delete(`${API_URL}/books/${bookId}`, {
+    headers: authHeader(),
+  });
+};

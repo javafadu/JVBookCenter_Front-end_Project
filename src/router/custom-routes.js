@@ -142,7 +142,7 @@ const CustomRoutes = () => {
             <Route
               index
               element={
-                <ProtectedRoute admin={true}>
+                <ProtectedRoute admin={true} staff={true}>
                   <AdminTemplate>
                     <AdminDashboardPage />
                   </AdminTemplate>
@@ -153,7 +153,7 @@ const CustomRoutes = () => {
             <Route
               path="books"
               element={
-                <ProtectedRoute admin={true}>
+                <ProtectedRoute admin={true} staff={true}>
                   <AdminTemplate>
                     <AdminBooksPage />
                   </AdminTemplate>
@@ -164,7 +164,7 @@ const CustomRoutes = () => {
             <Route
               path="book-edit"
               element={
-                <ProtectedRoute admin={true}>
+                <ProtectedRoute admin={true} staff={true}>
                   <AdminTemplate>
                     <AdminBookEditPage />
                   </AdminTemplate>
