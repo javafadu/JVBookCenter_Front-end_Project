@@ -5,6 +5,7 @@ import BreadCrumbBookEdit from "./breadcrumb-book-edit";
 import Spacer from "../../general/spacer/spacer";
 import BookEditForm from "./book-edit-form";
 import LoaningHistory from "./loaning-history";
+import LoanForm from "./loan-form";
 
 const BookEdit = () => {
   return (
@@ -15,6 +16,8 @@ const BookEdit = () => {
         <Spacer height={10} />
         <BookEditForm />
         <Spacer height={10} />
+        <LoanForm />
+        <Spacer height={20} />
         <LoaningHistory />
       </div>
     </>

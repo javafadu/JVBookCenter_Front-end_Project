@@ -25,3 +25,16 @@ export const updateAuthPassword = (passwords) => {
     headers: authHeader(),
   });
 };
+
+export const searchUsers = (
+  q = "",
+  page = 0,
+  size = 20,
+  sort = "firstName",
+  direction = "ASC"
+) => {
+  return axios.get(
+    `${API_URL}/users?q=${q}&page=${page}&size=${size}&sort=${sort}&direction=${direction}`,
+    { headers: authHeader() }
+  );
+};

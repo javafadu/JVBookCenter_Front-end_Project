@@ -65,8 +65,8 @@ const BookList = () => {
         <Container className="book-list-container">
           <h2>{result}</h2>
           {books.map((book, index) => (
-            <Row>
-              <Row key={index}>
+            <Row key={index}>
+              <Row >
                 <Col md={1}>
                   <a href={`./book-edit/?id=${book.id}&bookName=${book.name}`}>
                     <img

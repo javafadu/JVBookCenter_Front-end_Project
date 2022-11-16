@@ -46,3 +46,9 @@ export const getAnyLoanWithId = (loanId) => {
     headers: authHeader(),
   });
 };
+
+export const saveLoan = (loan) => {
+  return axios.post(`${API_URL}/loans`, loan, {
+    headers: authHeader(),
+  });
+};
