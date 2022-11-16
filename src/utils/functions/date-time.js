@@ -45,3 +45,7 @@ export const formatDateTimeToLLL = (dateTime) => {
 export const formatDateLibrary = (dateTime) => {
   return moment(dateTime).format("Do MMMM YYYY");
 };
+
+export const formDateTimeFormat = (dateTime) => {
+  return moment(dateTime).format("YYYY-MM-DD HH:mm:ss");
+};

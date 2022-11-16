@@ -15,9 +15,6 @@ const BookEdit = () => {
         <Spacer height={10} />
         <BookEditForm />
         <Spacer height={10} />
-        <div>
-          <h2>Loaning History</h2>
-        </div>
         <LoaningHistory />
       </div>
     </>

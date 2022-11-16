@@ -19,10 +19,9 @@ export const getAuthLoanedBooks = (
   );
 };
 
-
 /* Get Loans of selected Book */
 export const getLoansOfBook = (
-  id=0,
+  id = 0,
   page = 0,
   size = 2,
   sort = "loanDate",
@@ -34,4 +33,16 @@ export const getLoansOfBook = (
       headers: authHeader(),
     }
   );
+};
+
+export const updateLoan = (loanId, loan) => {
+  return axios.put(`${API_URL}/loans/${loanId}`, loan, {
+    headers: authHeader(),
+  });
+};
+
+export const getAnyLoanWithId = (loanId) => {
+  return axios.get(`${API_URL}/loans/auth/${loanId}`, {
+    headers: authHeader(),
+  });
 };

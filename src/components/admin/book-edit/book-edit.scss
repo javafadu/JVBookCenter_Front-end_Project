@@ -65,4 +65,42 @@
 
 [data-column-id="name"].rdt_TableCol {
     background-color: v.$color5;
+    font-weight: 800;
+    font-size:1rem;
   }
+
+  [data-column-id="loan-date"].rdt_TableCol {
+    background-color: v.$color5;
+    font-weight: 800;
+    font-size:1rem;
+  }
+  [data-column-id="expire-date"].rdt_TableCol {
+    background-color: v.$color5;
+    font-weight: 800;
+    font-size:1rem;
+  }
+  [data-column-id="return-date"].rdt_TableCol {
+    background-color: v.$color5;
+    font-weight: 800;
+    font-size:1rem;
+  }
+  [data-column-id="edit"].rdt_TableCol {
+    background-color: v.$color5;
+    font-weight: 800;
+    font-size:1rem;
+    text-align: center;
+  }
+.edit-button {
+    width:100%;
+    height:3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: #EFEFEF;
+}
+
+.return-status-form {
+    height:230px;
+    background-color: v.$color3;
+}
+
+
