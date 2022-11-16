@@ -90,7 +90,7 @@ const CustomRoutes = () => {
             <Route
               index
               element={
-                <ProtectedRoute>
+                <ProtectedRoute member={true}>
                   <UserTemplate>
                     <ProfilePage />
                   </UserTemplate>
@@ -101,7 +101,7 @@ const CustomRoutes = () => {
             <Route
               path="my-profile"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute member={true}>
                   <UserTemplate>
                     <Profile>
                       <ProfileForm user={user} />
@@ -114,7 +114,7 @@ const CustomRoutes = () => {
             <Route
               path="my-account"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute member={true}>
                   <UserTemplate>
                     <Profile>
                       <PasswordForm />
@@ -127,7 +127,7 @@ const CustomRoutes = () => {
             <Route
               path="my-books"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute member={true}>
                   <UserTemplate>
                     <Profile>
                       <MyBooks user={user} />

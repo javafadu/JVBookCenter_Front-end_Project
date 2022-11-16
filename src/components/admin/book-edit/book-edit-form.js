@@ -129,7 +129,7 @@ const BookEditForm = () => {
         ? (payload.imageLink = `assets/img/books/${imageFileName}`)
         : (payload.imageLink = initialValues.imageLink);
       isImageChanged = false;
-      console.log(payload);
+
       await updateBook(bookId, payload);
       toast("Book was updated", "success");
       navigate(-1);
@@ -267,7 +267,7 @@ const BookEditForm = () => {
     <Form noValidate onSubmit={formik.handleSubmit} className="px-2">
       <fieldset disabled={!access}>
         <Row>
-          <Col xl={3} className="image-area">
+          <Col md={4} lg={4} xl={3} className="image-area">
             <Form.Control
               type="file"
               name="image"
@@ -297,7 +297,7 @@ const BookEditForm = () => {
               Select Image
             </Button>
           </Col>
-          <Col xl={9}>
+          <Col md={8} lg={8} xl={9}>
             <Row>
               <Form.Group as={Col} md={4} lg={3} className="mb-3">
                 <Form.Label>Name of Book</Form.Label>
@@ -461,7 +461,7 @@ const BookEditForm = () => {
               </Form.Group>
 
               <Form.Group as={Col} md={4} lg={3} className="mb-3">
-                <Form.Label>Featured</Form.Label>
+                <Form.Label>Active</Form.Label>
 
                 <Form.Select
                   {...formik.getFieldProps("active")}

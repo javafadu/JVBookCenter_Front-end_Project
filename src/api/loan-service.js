@@ -18,3 +18,20 @@ export const getAuthLoanedBooks = (
     }
   );
 };
+
+
+/* Get Loans of selected Book */
+export const getLoansOfBook = (
+  id=0,
+  page = 0,
+  size = 2,
+  sort = "loanDate",
+  direction = "DESC"
+) => {
+  return axios.get(
+    `${API_URL}/loans/book/${id}?page=${page}&size=${size}&sort=${sort}&direction=${direction}`,
+    {
+      headers: authHeader(),
+    }
+  );
+};
