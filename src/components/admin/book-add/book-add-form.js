@@ -79,6 +79,7 @@ const BookAddForm = () => {
       ),
 
     pageCount: Yup.number().positive().integer(),
+    publishDate: Yup.number(),
     bookAuthor: Yup.number().positive().integer().required("Select an author"),
     bookPublisher: Yup.number()
       .positive()
