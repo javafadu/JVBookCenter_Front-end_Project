@@ -2,16 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, Pagination, Row } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import Loading from "../../general/loading/loading";
-import { CgCalendarDates } from "react-icons/cg";
-import { getFilteredBooksByAdmin } from "../../../api/book-service";
-import { formatDateLibrary } from "../../../utils/functions/date-time";
-import "./books.scss";
+
+import "./categories.scss";
+import { getFilteredCategories } from "../../../api/category-service";
 
 let sortBy = "id";
 let sortType = "DESC";
 
-const BookList = () => {
-  const [books, setBooks] = useState([]);
+const CategoryList = () => {
+  const [categories, setCategories] = useState([]);
   const [pagination, setPagination] = useState({});
   const [loading, setLoading] = useState(true);
   const [result, setResult] = useState("");
@@ -33,15 +32,13 @@ const BookList = () => {
         sortType = "ASC";
       }
 
-      const resp = await getFilteredBooksByAdmin(
+      const resp = await getFilteredCategories(
         page,
         10,
         sortBy,
         sortType,
         searchQ
       );
-
-      console.log(resp.data.content);
 
       const {
         content,
@@ -52,7 +49,7 @@ const BookList = () => {
         pageable,
       } = resp.data;
 
-      setBooks(content);
+      setCategories(content);
 
       if (numberOfElements === 0 && searchQ.length > 0)
         setResult("No results for: " + searchQ);
@@ -66,6 +63,7 @@ const BookList = () => {
       });
     } catch (err) {
       console.log(err);
+      setResult(err.response.data.message);
     } finally {
       setLoading(false);
     }
@@ -80,42 +78,19 @@ const BookList = () => {
       {loading ? (
         <Loading />
       ) : (
-        <Container className="book-list-container">
+        <Container className="list-container">
           <h2>{result}</h2>
-          {books.map((book, index) => (
+          {categories.map((category, index) => (
             <Row key={index}>
               <Row>
-                <Col md={1}>
-                  <a href={`./book-edit/?id=${book.id}&bookName=${book.name}`}>
-                    <img
-                      src={
-                        book.imageLink
-                          ? require(`../../../${book?.imageLink}`)
-                          : ""
-                      }
-                      alt={book.name}
-                      className="img-fluid"
-                    />
+                <Col>
+                  <a
+                    href={`./category-edit/?id=${category.id}&categoryName=${category.name}`}
+                  >
+                    <h2>{category.name}</h2>
                   </a>
                 </Col>
-
-                <Col md={11}>
-                  <Row>
-                    <a
-                      href={`./book-edit/?id=${book.id}&bookName=${book.name}`}
-                    >
-                      <h2>{book.name}</h2>
-                    </a>
-                  </Row>
-                  <Row>
-                    <Col>{book.bookAuthor.name}</Col>
-                    <Col>{book.shelfCode}</Col>
-                  </Row>
-                  <Row>
-                    <Col>{book.isbn}</Col>
-                    <Col>{book.loanable ? "Available" : "Not-Avilable"}</Col>
-                  </Row>
-                </Col>
+                <Col>{category.builtIn ? "Built-In" : "Not Built-In"}</Col>
               </Row>
               <div>
                 <hr />
@@ -166,4 +141,4 @@ const BookList = () => {
   );
 };
 
-export default BookList;
+export default CategoryList;

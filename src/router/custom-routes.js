@@ -30,6 +30,8 @@ import AdminAuthorEditPage from "../pages/admin/admin-author-edit-page";
 import AdminAuthorAddPage from "../pages/admin/admin-author-add-page";
 import AdminPublisherEditPage from "../pages/admin/admin-publisher-edit-page ";
 import AdminPublisherAddPage from "../pages/admin/admin-publisher-add-page";
+import AdminCategoryEditPage from "../pages/admin/admin-category-edit-page";
+import AdminCategoryAddPage from "../pages/admin/admin-category-add-page";
 
 const CustomRoutes = () => {
   const user = useSelector((state) => state.auth.user);
@@ -259,6 +261,28 @@ const CustomRoutes = () => {
                 <ProtectedRoute admin={true}>
                   <AdminTemplate>
                     <AdminCategoriesPage />
+                  </AdminTemplate>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="category-edit"
+              element={
+                <ProtectedRoute admin={true} staff={true}>
+                  <AdminTemplate>
+                    <AdminCategoryEditPage />
+                  </AdminTemplate>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="category-add"
+              element={
+                <ProtectedRoute admin={true}>
+                  <AdminTemplate>
+                    <AdminCategoryAddPage />
                   </AdminTemplate>
                 </ProtectedRoute>
               }

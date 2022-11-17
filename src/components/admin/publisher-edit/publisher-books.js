@@ -68,9 +68,9 @@ const columns = [
     selector: (row) => (row.active ? "Active" : "Not-active"),
   },
   {
-    name: "In Library",
+    name: "Status Of Book",
     id: "active",
-    selector: (row) => (row.loanable ? "In Library" : "Not-active"),
+    selector: (row) => (row.loanable ? "In the Library" : "Loaned"),
   },
 ];
 

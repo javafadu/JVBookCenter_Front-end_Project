@@ -4,7 +4,7 @@ import DataTable from "react-data-table-component";
 import { useNavigate, useLocation } from "react-router-dom";
 import Loading from "../../general/loading/loading";
 
-import "./author-edit.scss";
+import "./category-edit.scss";
 import { CgMenuGridO } from "react-icons/cg";
 
 import { getFilteredBooksByAdmin } from "../../../api/book-service";
@@ -74,7 +74,7 @@ const columns = [
   },
 ];
 
-const AuthorBooks = () => {
+const CategoryBooks = () => {
   const [loading, setLoading] = useState(false);
 
   const [books, setBooks] = useState([]);
@@ -84,7 +84,7 @@ const AuthorBooks = () => {
 
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const authorId = params.get("id");
+  const categoryId = params.get("id");
 
   const loadData = async (
     page = 0,
@@ -92,8 +92,8 @@ const AuthorBooks = () => {
     sort = "name",
     direction = "ASC",
     searchQ = "",
-    searchCat = "",
-    searchAuthor = authorId,
+    searchCat = categoryId,
+    searchAuthor = "",
     searchPublisher = ""
   ) => {
     try {
@@ -148,7 +148,7 @@ const AuthorBooks = () => {
   return (
     <Container className="px-2">
       <div className="my-2">
-        <h2>Books of Selected Author</h2>
+        <h2>Books of Selected Category</h2>
       </div>
       <DataTable
         columns={columns}
@@ -166,4 +166,4 @@ const AuthorBooks = () => {
     </Container>
   );
 };
-export default AuthorBooks;
+export default CategoryBooks;

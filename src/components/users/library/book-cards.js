@@ -3,7 +3,7 @@ import { getFeaturedBooks, getFilteredBooks } from "../../../api/book-service";
 import BookCard from "./book-card";
 import { Pagination, Row } from "react-bootstrap";
 import Loading from "../../general/loading/loading";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "./book-cards.scss";
 import SectionTitle from "../../general/section-title/section-title";
 
