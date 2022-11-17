@@ -38,3 +38,18 @@ export const searchUsers = (
     { headers: authHeader() }
   );
 };
+
+export const getFilteredUsers = (
+  page = 0,
+  size = 6,
+  sort = "firstName",
+  direction = "ASC",
+  q = ""
+) => {
+  return axios.get(
+    `${API_URL}/users?page=${page}&size=${size}&sort=${sort}&direction=${direction}&q=${q}`,
+    {
+      headers: authHeader(),
+    }
+  );
+};
