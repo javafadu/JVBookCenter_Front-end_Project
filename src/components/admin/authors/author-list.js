@@ -7,6 +7,10 @@ import { getFilteredAuthors } from "../../../api/author-service";
 import { formatDateLibrary } from "../../../utils/functions/date-time";
 import "./authors.scss";
 
+
+let sortBy = "id";
+let sortType = "DESC";
+
 const AuthorList = () => {
   const [authors, setAuthors] = useState([]);
   const [pagination, setPagination] = useState({});
@@ -24,7 +28,22 @@ const AuthorList = () => {
 
   const loadData = async (page) => {
     try {
-      const resp = await getFilteredAuthors(page, 10, "name", "ASC", searchQ);
+      if (params.get("q") != null) {
+        searchQ = params.get("q");
+        sortBy = "name";
+        sortType = "ASC";
+      }
+
+      const resp = await getFilteredAuthors(
+        page,
+        10,
+        sortBy,
+        sortType,
+        searchQ
+      );
+
+     
+
       const {
         content,
         numberOfElements,
@@ -48,13 +67,14 @@ const AuthorList = () => {
       });
     } catch (err) {
       console.log(err);
+      setResult(err.response.data.message);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    searchQ ? loadData(0) : setLoading(false);
+    loadData(0);
   }, []);
 
   return (
@@ -62,26 +82,25 @@ const AuthorList = () => {
       {loading ? (
         <Loading />
       ) : (
-        <Container className="book-list-container">
+        <Container className="authors-list-container">
           <h2>{result}</h2>
-          {searchQ.length > 1 &&
-            authors.map((author, index) => (
-              <Row key={index}>
-                <Row>
-                  <Col>
-                    <a
-                      href={`./author-edit/?id=${author.id}&authorName=${author.name}`}
-                    >
-                      <h2>{author.name}</h2>
-                    </a>
-                  </Col>
-                  <Col>{author.builtIn ? "Built-In" : "Not Built-In"}</Col>
-                </Row>
-                <div>
-                  <hr />
-                </div>
+          {authors.map((author, index) => (
+            <Row key={index}>
+              <Row>
+                <Col>
+                  <a
+                    href={`./author-edit/?id=${author.id}&authorName=${author.name}`}
+                  >
+                    <h2>{author.name}</h2>
+                  </a>
+                </Col>
+                <Col>{author.builtIn ? "Built-In" : "Not Built-In"}</Col>
               </Row>
-            ))}
+              <div>
+                <hr />
+              </div>
+            </Row>
+          ))}
 
           {pagination.totalPages > 1 && (
             <Row className="loans-pagination">

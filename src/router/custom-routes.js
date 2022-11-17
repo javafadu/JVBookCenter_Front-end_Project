@@ -26,6 +26,8 @@ import AdminUsersPage from "../pages/admin/admin-users-page";
 import AdminReportsPage from "../pages/admin/admin-reports-page";
 import AdminBookEditPage from "../pages/admin/admin-book-edit-page";
 import AdminBookAddPage from "../pages/admin/admin-book-add-page";
+import AdminAuthorEditPage from "../pages/admin/admin-author-edit-page";
+import AdminAuthorAddPage from "../pages/admin/admin-author-add-page";
 
 const CustomRoutes = () => {
   const user = useSelector((state) => state.auth.user);
@@ -189,6 +191,28 @@ const CustomRoutes = () => {
                 <ProtectedRoute admin={true}>
                   <AdminTemplate>
                     <AdminAuthorsPage />
+                  </AdminTemplate>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="author-edit"
+              element={
+                <ProtectedRoute admin={true} staff={true}>
+                  <AdminTemplate>
+                    <AdminAuthorEditPage />
+                  </AdminTemplate>
+                </ProtectedRoute>
+              }
+            />
+
+<Route
+              path="author-add"
+              element={
+                <ProtectedRoute admin={true}>
+                  <AdminTemplate>
+                    <AdminAuthorAddPage />
                   </AdminTemplate>
                 </ProtectedRoute>
               }

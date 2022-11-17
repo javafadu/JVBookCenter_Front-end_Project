@@ -22,7 +22,7 @@ export const getFeaturedBooks = (
   );
 };
 
-/* Get All book with q filter */
+/* Get All book with q filter by member*/
 
 export const getFilteredBooks = (
   page = 0,
@@ -35,7 +35,27 @@ export const getFilteredBooks = (
   publisher = ""
 ) => {
   return axios.get(
-    `${API_URL}/books?page=${page}&size=${size}&sort=name&direction=${direction}&q=${q}&cat=${cat}&author=${author}&publisher=${publisher}`
+    `${API_URL}/books?page=${page}&size=${size}&sort=${sort}&direction=${direction}&q=${q}&cat=${cat}&author=${author}&publisher=${publisher}`
+  );
+};
+
+/* Get All book with q filter by Admin (including not-adtive books)*/
+
+export const getFilteredBooksByAdmin = (
+  page = 0,
+  size = 6,
+  sort = "name",
+  direction = "ASC",
+  q = "",
+  cat = "",
+  author = "",
+  publisher = ""
+) => {
+  return axios.get(
+    `${API_URL}/books/pages?page=${page}&size=${size}&sort=${sort}&direction=${direction}&q=${q}&cat=${cat}&author=${author}&publisher=${publisher}`,
+    {
+      headers: authHeader(),
+    }
   );
 };
 

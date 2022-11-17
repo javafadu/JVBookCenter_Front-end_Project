@@ -25,6 +25,9 @@ const BookList = () => {
   const loadData = async (page) => {
     try {
       const resp = await getFilteredBooks(page, 10, "name", "ASC", searchQ);
+
+      console.log(resp);
+
       const {
         content,
         numberOfElements,
@@ -54,7 +57,7 @@ const BookList = () => {
   };
 
   useEffect(() => {
-    searchQ ? loadData(0) : setLoading(false);
+    loadData(0);
   }, []);
 
   return (
