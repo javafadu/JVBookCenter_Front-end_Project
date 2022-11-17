@@ -1,7 +1,12 @@
 import React from "react";
+import Publishers from "../../components/admin/publishers/publishers";
 
 const AdminPublishersPage = () => {
-  return <div>AdminPublishersPage</div>;
+  return (
+    <div>
+      <Publishers />
+    </div>
+  );
 };
 
 export default AdminPublishersPage;

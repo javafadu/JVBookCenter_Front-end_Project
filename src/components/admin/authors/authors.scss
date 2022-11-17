@@ -1,7 +1,13 @@
 @use "../../../assets/scss/variables" as v;
 
 .admin-authors-page {
-    width:80%;
+
+    @media (min-width: 992px) {
+        
+        width: 80%;
+       
+        
+      }
 }
 
 
@@ -30,9 +36,3 @@
   
 }
 
-.authors-list-container {
-    display:block;
-
-    width: 80%; 
-    height:auto;
-}

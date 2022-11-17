@@ -7,7 +7,6 @@ import { getFilteredAuthors } from "../../../api/author-service";
 import { formatDateLibrary } from "../../../utils/functions/date-time";
 import "./authors.scss";
 
-
 let sortBy = "id";
 let sortType = "DESC";
 
@@ -41,8 +40,6 @@ const AuthorList = () => {
         sortType,
         searchQ
       );
-
-     
 
       const {
         content,
@@ -82,7 +79,7 @@ const AuthorList = () => {
       {loading ? (
         <Loading />
       ) : (
-        <Container className="authors-list-container">
+        <Container className="list-container">
           <h2>{result}</h2>
           {authors.map((author, index) => (
             <Row key={index}>
