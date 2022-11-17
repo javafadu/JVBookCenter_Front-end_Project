@@ -1,7 +1,12 @@
 import React from "react";
+import Authors from "../../components/admin/authors/authors";
 
 const AdminAuthorsPage = () => {
-  return <div>AdminAuthorsPage</div>;
+  return (
+    <div>
+      <Authors />
+    </div>
+  );
 };
 
 export default AdminAuthorsPage;

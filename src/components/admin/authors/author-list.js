@@ -3,12 +3,12 @@ import { Col, Container, Pagination, Row } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import Loading from "../../general/loading/loading";
 import { CgCalendarDates } from "react-icons/cg";
-import { getFilteredBooks } from "../../../api/book-service";
+import { getFilteredAuthors } from "../../../api/author-service";
 import { formatDateLibrary } from "../../../utils/functions/date-time";
-import "./books.scss";
+import "./authors.scss";
 
-const BookList = () => {
-  const [books, setBooks] = useState([]);
+const AuthorList = () => {
+  const [authors, setAuthors] = useState([]);
   const [pagination, setPagination] = useState({});
   const [loading, setLoading] = useState(true);
   const [result, setResult] = useState("");
@@ -24,7 +24,7 @@ const BookList = () => {
 
   const loadData = async (page) => {
     try {
-      const resp = await getFilteredBooks(page, 10, "name", "ASC", searchQ);
+      const resp = await getFilteredAuthors(page, 10, "name", "ASC", searchQ);
       const {
         content,
         numberOfElements,
@@ -34,7 +34,7 @@ const BookList = () => {
         pageable,
       } = resp.data;
 
-      setBooks(content);
+      setAuthors(content);
 
       if (numberOfElements === 0 && searchQ.length > 0)
         setResult("No results for: " + searchQ);
@@ -64,46 +64,24 @@ const BookList = () => {
       ) : (
         <Container className="book-list-container">
           <h2>{result}</h2>
-          {books.map((book, index) => (
-            <Row key={index}>
-              <Row>
-                <Col md={1}>
-                  <a href={`./book-edit/?id=${book.id}&bookName=${book.name}`}>
-                    <img
-                      src={
-                        book.imageLink
-                          ? require(`../../../${book?.imageLink}`)
-                          : ""
-                      }
-                      alt={book.name}
-                      className="img-fluid"
-                    />
-                  </a>
-                </Col>
-
-                <Col md={10}>
-                  <Row>
+          {searchQ.length > 1 &&
+            authors.map((author, index) => (
+              <Row key={index}>
+                <Row>
+                  <Col>
                     <a
-                      href={`./book-edit/?id=${book.id}&bookName=${book.name}`}
+                      href={`./author-edit/?id=${author.id}&authorName=${author.name}`}
                     >
-                      <h2>{book.name}</h2>
+                      <h2>{author.name}</h2>
                     </a>
-                  </Row>
-                  <Row>
-                    <Col>{book.bookAuthor.name}</Col>
-                    <Col>{book.shelfCode}</Col>
-                  </Row>
-                  <Row>
-                    <Col>{book.isbn}</Col>
-                    <Col>{book.loanable ? "Available" : "Not-Avilable"}</Col>
-                  </Row>
-                </Col>
+                  </Col>
+                  <Col>{author.builtIn ? "Built-In" : "Not Built-In"}</Col>
+                </Row>
+                <div>
+                  <hr />
+                </div>
               </Row>
-              <div>
-                <hr />
-              </div>
-            </Row>
-          ))}
+            ))}
 
           {pagination.totalPages > 1 && (
             <Row className="loans-pagination">
@@ -148,4 +126,4 @@ const BookList = () => {
   );
 };
 
-export default BookList;
+export default AuthorList;

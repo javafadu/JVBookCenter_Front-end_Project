@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./books.scss";
 import { BsSearch } from "react-icons/bs";
 
-const SearchBar = () => {
+const BookSearchBar = () => {
   const [input, setInput] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
@@ -62,4 +62,4 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+export default BookSearchBar;

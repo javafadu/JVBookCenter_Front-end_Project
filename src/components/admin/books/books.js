@@ -2,7 +2,7 @@ import React from "react";
 import Spacer from "../../general/spacer/spacer";
 import BookList from "./book-list";
 import BreadCrumb from "./breadcrumb";
-import SearchBar from "./searchbar";
+import BookSearchBar from "./book-searchbar";
 import "./books.scss";
 import SectionTitle from "../../general/section-title/section-title";
 
@@ -13,7 +13,7 @@ const Books = () => {
         <SectionTitle title="Books" />
         <BreadCrumb />
         <Spacer height={10} />
-        <SearchBar />
+        <BookSearchBar />
         <Spacer height={10} />
         <BookList />
       </div>
