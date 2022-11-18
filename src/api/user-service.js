@@ -74,3 +74,9 @@ export const getUserWithId = (userId) => {
     headers: authHeader(),
   });
 };
+
+export const createUser = (user) => {
+  return axios.post(`${API_URL}/users`, user, {
+    headers: authHeader(),
+  });
+};
