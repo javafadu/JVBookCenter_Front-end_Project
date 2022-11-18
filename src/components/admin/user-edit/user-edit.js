@@ -6,7 +6,6 @@ import Spacer from "../../general/spacer/spacer";
 import UserEditForm from "./user-edit-form";
 import LoaningHistory from "./loaning-history";
 
-
 const UserEdit = () => {
   return (
     <>
@@ -16,7 +15,6 @@ const UserEdit = () => {
         <Spacer height={10} />
         <UserEditForm />
         <Spacer height={10} />
-       
         <LoaningHistory />
       </div>
     </>

@@ -53,6 +53,25 @@ const customStyles = {
   },
 };
 
+const conditionalRowStyles = [
+  {
+    when: (row) => row.returnDate === null,
+    style: {
+      backgroundColor: "bisque",
+      color: "black",
+      "&:hover": {
+        cursor: "pointer",
+      },
+    },
+  },
+  {
+    when: (row) => row.returnDate != null,
+    style: (row) => ({
+      backgroundColor: "#EFEFFF",
+    }),
+  },
+];
+
 const columns = [
   {
     cell: () => <CgMenuGridO style={{ fill: "#43a047" }} />,
@@ -82,7 +101,10 @@ const columns = [
   {
     name: "Return Date",
     id: "return-date",
-    selector: (row) => formatDateLibrary(row.returnDate),
+    selector: (row) =>
+      row.returnDate
+        ? formatDateLibrary(row.returnDate)
+        : `set as Returned (Click)`,
   },
 ];
 
@@ -180,6 +202,10 @@ const LoaningHistory = () => {
     setLoading(false);
   };
 
+  const handleCancel = () => {
+    setRetStatus(!retStatus);
+  };
+
   const handleEdit = async (row) => {
     setRetStatus(!retStatus);
 
@@ -269,9 +295,21 @@ const LoaningHistory = () => {
                 </Form.Control.Feedback>
               </Form.Group>
 
-              <Button variant="primary" type="submit" disabled={saving}>
-                {saving && <Spinner animation="border" size="sm" />} Update
-              </Button>
+              <div className="text-end">
+                <ButtonGroup aria-label="Basic example">
+                  <Button
+                    variant="secondary"
+                    type="button"
+                    onClick={() => handleCancel()}
+                  >
+                    Cancel
+                  </Button>
+
+                  <Button variant="primary" type="submit" disabled={saving}>
+                    {saving && <Spinner animation="border" size="sm" />} Update
+                  </Button>
+                </ButtonGroup>
+              </div>
             </Row>
           </Form>
         </Col>
@@ -283,6 +321,7 @@ const LoaningHistory = () => {
         columns={columns}
         data={loans}
         customStyles={customStyles}
+        conditionalRowStyles={conditionalRowStyles}
         progressPending={loading}
         progressComponent={<Loading />}
         onRowClicked={handleEdit}

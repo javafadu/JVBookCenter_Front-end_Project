@@ -53,6 +53,25 @@ const customStyles = {
   },
 };
 
+const conditionalRowStyles = [
+  {
+    when: (row) => row.returnDate === null,
+    style: {
+      backgroundColor: "bisque",
+      color: "black",
+      "&:hover": {
+        cursor: "pointer",
+      },
+    },
+  },
+  {
+    when: (row) => row.returnDate != null,
+    style: (row) => ({
+      backgroundColor: "#EFEFFF",
+    }),
+  },
+];
+
 const columns = [
   {
     cell: () => <CgMenuGridO style={{ fill: "#43a047" }} />,
@@ -65,7 +84,7 @@ const columns = [
   },
   {
     name: "Book",
-    selector: (row) => row.id,
+    selector: (row) => row.book.name,
     id: "name",
     sortable: true,
   },
@@ -82,7 +101,10 @@ const columns = [
   {
     name: "Return Date",
     id: "return-date",
-    selector: (row) => formatDateLibrary(row.returnDate),
+    selector: (row) =>
+      row.returnDate
+        ? formatDateLibrary(row.returnDate)
+        : `set as Returned (Click) `,
   },
 ];
 
@@ -180,6 +202,10 @@ const LoaningHistory = () => {
     setLoading(false);
   };
 
+  const handleCancel = () => {
+    setRetStatus(!retStatus);
+  };
+
   const handleEdit = async (row) => {
     setRetStatus(!retStatus);
 
@@ -208,6 +234,86 @@ const LoaningHistory = () => {
 
   return (
     <Container className="px-2">
+      <Row
+        className={`return-status-form w-100 ${
+          retStatus ? "d-none" : "d-block"
+        }`}
+      >
+        <Col>
+          {" "}
+          <div className="my-2">
+            <h3>Edit Loan</h3>
+          </div>
+          <Form noValidate onSubmit={formik.handleSubmit} className="px-2">
+            <Row>
+              <Form.Group as={Col} md={5} className="mb-3">
+                <Form.Label>Notes</Form.Label>
+                <Form.Control
+                  type="text"
+                  {...formik.getFieldProps("notes")}
+                  isInvalid={formik.touched.notes && formik.errors.notes}
+                  isValid={formik.touched.notes && !formik.errors.notes}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {formik.errors.notes}
+                </Form.Control.Feedback>
+              </Form.Group>
+
+              <Form.Group as={Col} md={3} className="mb-3">
+                <Form.Label>Expire Date</Form.Label>
+                <Form.Control
+                  type="datetime-local"
+                  timeFormat="YYYY-MM-DD HH:mm"
+                  {...formik.getFieldProps("expireDate")}
+                  isInvalid={
+                    formik.touched.expireDate && formik.errors.expireDate
+                  }
+                  isValid={
+                    formik.touched.expireDate && !formik.errors.expireDate
+                  }
+                />
+                <Form.Control.Feedback type="invalid">
+                  {formik.errors.expireDate}
+                </Form.Control.Feedback>
+              </Form.Group>
+
+              <Form.Group as={Col} md={3} className="mb-3">
+                <Form.Label>Return Date</Form.Label>
+                <Form.Control
+                  type="datetime-local"
+                  time-format="yyyy-mm-dd HH:MM:SS"
+                  {...formik.getFieldProps("returnDate")}
+                  isInvalid={
+                    formik.touched.returnDate && formik.errors.returnDate
+                  }
+                  isValid={
+                    formik.touched.returnDate && !formik.errors.returnDate
+                  }
+                />
+                <Form.Control.Feedback type="invalid">
+                  {formik.errors.returnDate}
+                </Form.Control.Feedback>
+              </Form.Group>
+
+              <div className="text-end">
+                <ButtonGroup aria-label="Basic example">
+                  <Button
+                    variant="secondary"
+                    type="button"
+                    onClick={() => handleCancel()}
+                  >
+                    Cancel
+                  </Button>
+
+                  <Button variant="primary" type="submit" disabled={saving}>
+                    {saving && <Spinner animation="border" size="sm" />} Update
+                  </Button>
+                </ButtonGroup>
+              </div>
+            </Row>
+          </Form>
+        </Col>
+      </Row>
       <div className="my-2">
         <h2>Loaning History</h2>
       </div>
@@ -215,6 +321,7 @@ const LoaningHistory = () => {
         columns={columns}
         data={loans}
         customStyles={customStyles}
+        conditionalRowStyles={conditionalRowStyles}
         progressPending={loading}
         progressComponent={<Loading />}
         onRowClicked={handleEdit}
