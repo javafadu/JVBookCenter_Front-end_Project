@@ -4,6 +4,7 @@ import authHeader from "./auth-header";
 
 const API_URL = settings.apiURL;
 
+/* AUTH AREA */
 export const register = (user) => {
   return axios.post(`${API_URL}/register`, user);
 };
@@ -25,6 +26,8 @@ export const updateAuthPassword = (passwords) => {
     headers: authHeader(),
   });
 };
+
+/* ADMIN AREA */
 
 export const searchUsers = (
   q = "",
@@ -52,4 +55,22 @@ export const getFilteredUsers = (
       headers: authHeader(),
     }
   );
+};
+
+export const updateUser = (userId, user) => {
+  return axios.put(`${API_URL}/users/${userId}`, user, {
+    headers: authHeader(),
+  });
+};
+
+export const deleteUser = (userId) => {
+  return axios.delete(`${API_URL}/users/${userId}`, {
+    headers: authHeader(),
+  });
+};
+
+export const getUserWithId = (userId) => {
+  return axios.get(`${API_URL}/users/${userId}`, {
+    headers: authHeader(),
+  });
 };

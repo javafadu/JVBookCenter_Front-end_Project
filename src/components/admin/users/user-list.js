@@ -88,6 +88,7 @@ const UserList = () => {
                 </Col>
                 <Col>{user.email}</Col>
                 <Col>{user.phone}</Col>
+                <Col>{user.phone}</Col>
               </Row>
               <div>
                 <hr />

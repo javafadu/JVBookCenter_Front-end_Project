@@ -1,7 +1,8 @@
 import React from "react";
+import UserEdit from "../../components/admin/user-edit/user-edit";
 
 const AdminUserEditPage = () => {
-  return <>USER EDIT</>;
+  return <><UserEdit/></>;
 };
 
 export default AdminUserEditPage;

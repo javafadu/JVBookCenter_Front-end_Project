@@ -52,3 +52,19 @@ export const saveLoan = (loan) => {
     headers: authHeader(),
   });
 };
+
+/* Get Loans of selected User */
+export const getLoansOfUser = (
+  id = 0,
+  page = 0,
+  size = 5,
+  sort = "loanDate",
+  direction = "DESC"
+) => {
+  return axios.get(
+    `${API_URL}/loans/user/${id}?page=${page}&size=${size}&sort=${sort}&direction=${direction}`,
+    {
+      headers: authHeader(),
+    }
+  );
+};
