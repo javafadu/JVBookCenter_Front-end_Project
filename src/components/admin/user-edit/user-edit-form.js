@@ -27,10 +27,8 @@ import { useSelector } from "react-redux";
 
 const UserEditForm = () => {
   const { isUserLogin, user } = useSelector((state) => state.auth);
-  let access = false;
 
-  if (user.roles.includes("Administrator") || user.roles.includes("Staff"))
-    access = true;
+  let access = false;
 
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
@@ -46,6 +44,18 @@ const UserEditForm = () => {
   const [memberCheck, setMemberCheck] = useState(false);
   const [staffCheck, setStaffCheck] = useState(false);
   const [adminCheck, setAdminCheck] = useState(false);
+
+  if (user.roles.includes("Administrator")) {
+    access = true;
+  } else {
+    if (user.roles.includes("Staff") && adminCheck) {
+      access = false;
+    } else if (user.roles.includes("Staff") && staffCheck) {
+      access = false;
+    } else {
+      access = true;
+    }
+  }
 
   const [initialValues, setInitialValues] = useState({
     firstName: "",

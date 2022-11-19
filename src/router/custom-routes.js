@@ -195,7 +195,7 @@ const CustomRoutes = () => {
             <Route
               path="authors"
               element={
-                <ProtectedRoute admin={true}>
+                <ProtectedRoute admin={true} staff={true}>
                   <AdminTemplate>
                     <AdminAuthorsPage />
                   </AdminTemplate>
@@ -228,7 +228,7 @@ const CustomRoutes = () => {
             <Route
               path="publishers"
               element={
-                <ProtectedRoute admin={true}>
+                <ProtectedRoute admin={true} staff={true}>
                   <AdminTemplate>
                     <AdminPublishersPage />
                   </AdminTemplate>
@@ -261,7 +261,7 @@ const CustomRoutes = () => {
             <Route
               path="categories"
               element={
-                <ProtectedRoute admin={true}>
+                <ProtectedRoute admin={true} staff={true}>
                   <AdminTemplate>
                     <AdminCategoriesPage />
                   </AdminTemplate>
@@ -327,7 +327,7 @@ const CustomRoutes = () => {
             <Route
               path="reports"
               element={
-                <ProtectedRoute admin={true}>
+                <ProtectedRoute admin={true} staff={true}>
                   <AdminTemplate>
                     <AdminReportsPage />
                   </AdminTemplate>
