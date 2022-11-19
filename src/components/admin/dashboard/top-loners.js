@@ -19,8 +19,6 @@ const TopLoaners = () => {
   const loadData = async () => {
     const resp = await mostBorrowers(10);
 
-    console.log(resp);
-
     setUsers(resp.data.content);
 
     setLoading(false);
