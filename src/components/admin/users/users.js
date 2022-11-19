@@ -9,7 +9,7 @@ import UserSearchBar from "./user-searchbar";
 const Users = () => {
   return (
     <>
-      <div className="admin-users-page">
+      <div className="admin-authors-page">
         <SectionTitle title="Users" />
         <BreadCrumb />
         <Spacer height={10} />

@@ -41,8 +41,6 @@ const BookList = () => {
         searchQ
       );
 
-      console.log(resp.data.content);
-
       const {
         content,
         numberOfElements,

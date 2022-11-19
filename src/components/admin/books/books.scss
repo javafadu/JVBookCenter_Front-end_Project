@@ -1,6 +1,7 @@
 @use "../../../assets/scss/variables" as v;
 
-.admin-books-page {
+
+.admin-authors-page {
 
     @media (min-width: 992px) {
         
@@ -8,6 +9,14 @@
        
         
       }
+}
+
+
+
+.admin-books-page {
+width:100%;
+margin:0;
+padding:0;
 }
 
 

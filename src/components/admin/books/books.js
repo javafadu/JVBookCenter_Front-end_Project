@@ -9,7 +9,7 @@ import SectionTitle from "../../general/section-title/section-title";
 const Books = () => {
   return (
     <>
-      <div className="admin-books-page">
+      <div className="admin-authors-page">
         <SectionTitle title="Books" />
         <BreadCrumb />
         <Spacer height={10} />
