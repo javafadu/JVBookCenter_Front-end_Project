@@ -14,6 +14,8 @@ import Spacer from "../../general/spacer/spacer";
 import TopLoanedBooks from "./top-loned-books";
 import TopLoanedCategories from "./top-loned-categories";
 import TopLoanedAuthors from "./top-loned-authors";
+import TopLoanedPublishers from "./top-loned-publishers";
+import TopLoaners from "./top-loners";
 
 const Dashboard = () => {
   const [report, serReport] = useState({});
@@ -212,6 +214,13 @@ const Dashboard = () => {
       <Spacer height={20} />
 
       <TopLoanedAuthors />
+      <hr></hr>
+      <Spacer height={20} />
+
+      <TopLoanedPublishers />
+      <Spacer height={20} />
+
+      <TopLoaners />
     </>
   );
 };

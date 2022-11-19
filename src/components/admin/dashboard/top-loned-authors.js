@@ -48,10 +48,9 @@ const TopLoanedAuthors = () => {
     return authorsArray;
   }
 
-
   return (
     <>
-      <h3>Top Authors</h3>
+      <h3>Most Popular Authors</h3>
 
       {loading ? (
         <Loading />

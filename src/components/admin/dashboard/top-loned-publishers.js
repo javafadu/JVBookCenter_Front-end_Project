@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getTopBooks } from "../../../api/book-service";
+import { getTopPublishers } from "../../../api/publisher-service";
 import {
   BarChart,
   Bar,
@@ -12,14 +12,14 @@ import {
 } from "recharts";
 import Loading from "../../general/loading/loading";
 
-const TopLoanedBooks = () => {
-  const [books, setBooks] = useState([]);
+const TopLoanedPublishers = () => {
+  const [publishers, setPublishers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const loadData = async () => {
-    const resp = await getTopBooks(10);
+    const resp = await getTopPublishers(10);
 
-    setBooks(resp.data);
+    setPublishers(resp.data);
     setLoading(false);
   };
 
@@ -27,38 +27,37 @@ const TopLoanedBooks = () => {
     loadData(0);
   }, []);
 
-  let bookObje = {
+  let publisherObje = {
     id: 0,
-    bookName: "",
-    isbn: "",
+    publisherName: "",
     count: 0,
   };
 
-  function arr2obj(books) {
-    let booksArray = [];
-    for (let i = 0; i < books.length; i++) {
+  function arr2obj(publishers) {
+    let publishersArray = [];
+    for (let i = 0; i < publishers.length; i++) {
       // Extract the key and the value
-      booksArray[i] = {
-        id: books[i][0],
-        bookName: books[i][1],
-        isbn: books[i][2],
-        count: books[i][3],
+      publishersArray[i] = {
+        id: publishers[i][0],
+        publisherName: publishers[i][1],
+        count: publishers[i][2],
       };
     }
 
     // Return the object
-    return booksArray;
+    return publishersArray;
   }
 
   return (
     <>
-      <h3>Most Popular Books</h3>
+      <h3>Most Popular Publishers</h3>
+
       {loading ? (
         <Loading />
       ) : (
         <ResponsiveContainer width="95%" height={300}>
           <BarChart
-            data={arr2obj(books)}
+            data={arr2obj(publishers)}
             margin={{
               top: 5,
               right: 30,
@@ -67,7 +66,12 @@ const TopLoanedBooks = () => {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="bookName" angle={-35} offset={5} interval={0} />
+            <XAxis
+              dataKey="publisherName"
+              angle={-35}
+              offset={5}
+              interval={0}
+            />
             <YAxis />
             <Tooltip />
             <Legend />
@@ -79,4 +83,4 @@ const TopLoanedBooks = () => {
   );
 };
 
-export default TopLoanedBooks;
+export default TopLoanedPublishers;

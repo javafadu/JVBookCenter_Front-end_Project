@@ -50,7 +50,7 @@ const TopLoanedCategories = () => {
 
   return (
     <>
-      <h3>Top Categories</h3>
+      <h3>Most Popular Categories</h3>
 
       {loading ? (
         <Loading />

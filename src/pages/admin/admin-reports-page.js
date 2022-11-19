@@ -1,7 +1,12 @@
 import React from "react";
+import AdminReports from "../../components/admin/reports/admin-reports";
 
 const AdminReportsPage = () => {
-  return <div>AdminReportsPage</div>;
+  return (
+    <div>
+      <AdminReports />
+    </div>
+  );
 };
 
 export default AdminReportsPage;

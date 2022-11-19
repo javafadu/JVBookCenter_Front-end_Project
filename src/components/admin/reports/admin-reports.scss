@@ -1,0 +1,55 @@
+@use "../../../assets/scss/variables" as v;
+
+
+
+[data-column-id="column1"].rdt_TableCol {
+    background-color: v.$color5;
+    font-weight: 800;
+    font-size:1rem;
+  }
+
+  [data-column-id="column2"].rdt_TableCol {
+    background-color: v.$color5;
+    font-weight: 800;
+    font-size:1rem;
+  }
+  [data-column-id="column3"].rdt_TableCol {
+    background-color: v.$color5;
+    font-weight: 800;
+    font-size:1rem;
+  }
+  [data-column-id="column4"].rdt_TableCol {
+    background-color: v.$color5;
+    font-weight: 800;
+    font-size:1rem;
+  }
+  [data-column-id="column5"].rdt_TableCol {
+    background-color: v.$color5;
+    font-weight: 800;
+    font-size:1rem;
+    text-align: center;
+  }
+.edit-button {
+    width:100%;
+    height:3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: #EFEFEF;
+}
+
+.return-status-form {
+    height:230px;
+    background-color: v.$color3;
+}
+
+.loan-form {
+    background-color:#EFEFEF;
+    box-shadow: 1px 1px 5px gray;
+    padding-bottom:1rem;
+}
+.search-area {
+    margin: 1rem 2rem;
+    padding-top:2rem;
+}
+
+

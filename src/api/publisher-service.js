@@ -4,6 +4,13 @@ import authHeader from "./auth-header";
 
 const API_URL = settings.apiURL;
 
+export const getTopPublishers = (topn) => {
+  const { top } = topn;
+  return axios.get(`${API_URL}/public/top-publishers`, {
+    params: { top: topn },
+  });
+};
+
 export const getAllPublishers = (
   page = 0,
   size = 50,
