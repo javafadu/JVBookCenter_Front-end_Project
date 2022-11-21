@@ -1,5 +1,5 @@
 import React from "react";
-import { Accordion } from "react-bootstrap";
+import { Accordion, Tabs, Tab } from "react-bootstrap";
 import Spacer from "../../general/spacer/spacer";
 import TopLoanedAuthors from "../dashboard/top-loned-authors";
 import TopLoanedBooks from "../dashboard/top-loned-books";
@@ -17,9 +17,18 @@ const AdminReports = () => {
         <Accordion.Item eventKey="0">
           <Accordion.Header>Most Popular Books</Accordion.Header>
           <Accordion.Body>
-            <TopLoanedBooks />
-            <Spacer height={20} />
-            <MostPopularBooksTable />
+            <Tabs
+              defaultActiveKey="profile"
+              id="uncontrolled-tab-example"
+              className="mb-3"
+            >
+              <Tab eventKey="home" title="Chart (Top 10)">
+                <TopLoanedBooks />
+              </Tab>
+              <Tab eventKey="profile" title="Table">
+                <MostPopularBooksTable />
+              </Tab>
+            </Tabs>
           </Accordion.Body>
         </Accordion.Item>
 
