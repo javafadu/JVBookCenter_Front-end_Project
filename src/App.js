@@ -28,7 +28,7 @@ function App() {
 
   useEffect(() => {
     loadData();
-    document.title = `${settings.siteName} | Premimum Car Rental`;
+    document.title = `${settings.siteName} | Read and Change Your Life`;
   }, []);
 
   return (
