@@ -19,7 +19,7 @@ import {
   deleteBook,
 } from "../../../api/book-service";
 import { question, toast } from "../../../utils/functions/swal";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Loading from "../../general/loading/loading";
 import { deleteImage, imageUpload } from "../../../api/image-service";
@@ -28,6 +28,7 @@ import { getAllCategories } from "../../../api/category-service";
 import { getAllPublishers } from "../../../api/publisher-service";
 import { getCurrentDate } from "../../../utils/functions/date-time";
 import { useSelector } from "react-redux";
+import { getBookImage } from "../../../utils/functions/book";
 
 let isImageChanged = false;
 
@@ -37,10 +38,11 @@ const BookEditForm = () => {
 
   if (user.roles.includes("Administrator")) access = true;
 
-  const [imageSrc, setImageSrc] = useState("");
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const [imageSrc, setImageSrc] = useState("");
   const fileImageRef = useRef();
   const navigate = useNavigate();
 
@@ -53,8 +55,6 @@ const BookEditForm = () => {
   const [authors, setAuthors] = useState([]);
   const [publishers, setPublishers] = useState([]);
 
-  const [imageFileName, setImageFileName] = useState("");
-
   const [initialValues, setInitialValues] = useState({
     name: "",
     isbn: "",
@@ -63,12 +63,12 @@ const BookEditForm = () => {
     bookPublisher: "",
     publishDate: "",
     bookCategory: "",
-    imageLink: "",
     loanable: "",
     shelfCode: "",
     active: "",
     featured: "",
     builtIn: "",
+    image: "",
   });
 
   const validationSchema = Yup.object({
@@ -104,33 +104,32 @@ const BookEditForm = () => {
     featured: Yup.bool().required("Please select"),
 
     builtIn: Yup.bool().required("Please select"),
+    image: Yup.mixed().required("Please select an image"),
   });
 
   const onSubmit = async (values) => {
     setSaving(true);
 
     try {
+      let imageId = values.image[0];
       // isImageChanged görüntü değiştirildiğinde true olacak
       if (isImageChanged) {
         // Mevcut image database den siliniyor
+        await deleteImage(imageId);
 
         const newImageFile = fileImageRef.current.files[0];
         const formData = new FormData();
-        formData.append("file", values.image);
-        formData.delete("file", fileImageRef.current.files[0]);
-        formData.append("file", fileImageRef.current.files[0], imageFileName);
+        formData.append("file", newImageFile);
 
         const respImage = await imageUpload(formData);
+        imageId = respImage.data.imageId;
+        isImageChanged = false;
       }
 
       const payload = { ...values };
       delete payload.image;
-      isImageChanged
-        ? (payload.imageLink = `assets/img/books/${imageFileName}`)
-        : (payload.imageLink = initialValues.imageLink);
-      isImageChanged = false;
 
-      await updateBook(bookId, payload);
+      await updateBook(imageId, bookId, payload);
       toast("Book was updated", "success");
       navigate(-1);
     } catch (err) {
@@ -153,11 +152,7 @@ const BookEditForm = () => {
   };
   const handleImageChange = () => {
     const file = fileImageRef.current.files[0];
-    var filename = `${Math.random().toString(32).slice(2)}${
-      fileImageRef.current.files[0].name
-    }`;
 
-    setImageFileName(filename);
     if (!file) return;
 
     const reader = new FileReader(); //Seçilen görüntüyü ekrana yerleştirdik
@@ -184,12 +179,12 @@ const BookEditForm = () => {
         bookPublisher,
         publishDate,
         bookCategory,
-        imageLink,
         loanable,
         shelfCode,
         active,
         featured,
         builtIn,
+        image,
       } = resp.data;
 
       const dto = {
@@ -200,16 +195,17 @@ const BookEditForm = () => {
         bookPublisher: bookPublisher.id,
         publishDate,
         bookCategory: bookCategory.id,
-        imageLink,
         loanable,
         shelfCode,
         active,
         featured,
         builtIn,
+        image,
       };
 
       setInitialValues(dto);
-      setImageSrc(resp.data.imageLink);
+      setImageSrc(resp.data.image);
+
       const resp2 = await getAllCategories();
       setCategories(resp2.data.content);
       const resp3 = await getAllAuthors();
@@ -279,13 +275,13 @@ const BookEditForm = () => {
               <img src={imageSrc} className="img-fluid" alt="..." />
             ) : (
               <img
+                src={getBookImage(imageSrc)}
                 className="img-fluid rounded"
-                src={require(`../../../${imageSrc}`)}
-                alt=""
+                alt={book.name}
               />
             )}
 
-            {formik.errors.imageLink && (
+            {formik.errors.image && (
               <Badge bg="danger" className="image-area-error">
                 Please select an image
               </Badge>

@@ -1,8 +1,8 @@
 export const settings = {
-  apiURL: "https://javanarlar-library-app.herokuapp.com",
-  siteName: "JV Book Center",
-  siteUrl: "jvbookcenter.com",
-  imageServer: "http://192.168.1.171/books/",
+  apiURL: "https://book-loan-center.herokuapp.com",
+  siteName: "Book Loan Center",
+  siteUrl: "https://www.jvbookcenter.com/",
+  imageServer: "https://book-loan-center.herokuapp.com",
   email: "info@jvbookcenter.com",
   phone1: "(609)-203-0997",
   phone2: "(609)-218-9730",

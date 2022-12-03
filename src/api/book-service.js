@@ -18,7 +18,7 @@ export const getFeaturedBooks = (
   direction = "ASC"
 ) => {
   return axios.get(
-    `${API_URL}/books/featured-books?page=${page}&size=${size}&sort=name&direction=${direction}`
+    `${API_URL}/books/featured-books?page=${page}&size=${size}&sort=${sort}&direction=${direction}`
   );
 };
 
@@ -64,14 +64,14 @@ export const getBookWithId = (id) => {
   return axios.get(`${API_URL}/books/${id}`);
 };
 
-export const createBook = (book) => {
-  return axios.post(`${API_URL}/books`, book, {
+export const createBook = (imageId, book) => {
+  return axios.post(`${API_URL}/books/add/${imageId}`, book, {
     headers: authHeader(),
   });
 };
 
-export const updateBook = (bookId, book) => {
-  return axios.put(`${API_URL}/books/${bookId}`, book, {
+export const updateBook = (imageId, bookId, book) => {
+  return axios.put(`${API_URL}/books/id=${bookId}&imageId=${imageId}`, book, {
     headers: authHeader(),
   });
 };

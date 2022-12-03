@@ -5,6 +5,7 @@ import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
 import "./featured-books.scss";
 import { getFeaturedBooks } from "../../../api/book-service";
 import Loading from "../../general/loading/loading";
+import { getBookImage } from "../../../utils/functions/book";
 
 const FeaturedBooks = () => {
   const [isEnd, setIsEnd] = useState(false);
@@ -109,10 +110,11 @@ const FeaturedBooks = () => {
                         >
                           <div className="team-item">
                             <img
+                              src={getBookImage(book.image)}
                               className="img-fluid rounded"
-                              src={require(`../../../${book.imageLink}`)}
-                              alt=""
+                              alt={book.name}
                             />
+
                             <div className="bg-light text-center p-2">
                               <div className="book-title">
                                 <h5 className="mb-3">{book.name}</h5>

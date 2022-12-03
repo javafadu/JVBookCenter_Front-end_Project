@@ -5,6 +5,7 @@ import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
 import "./same-category-books.scss";
 import { getFeaturedBooks, getFilteredBooks } from "../../../api/book-service";
 import Loading from "../../general/loading/loading";
+import { getBookImage } from "../../../utils/functions/book";
 
 const SameCategoryBooks = (props) => {
   const [isEnd, setIsEnd] = useState(false);
@@ -125,9 +126,9 @@ const SameCategoryBooks = (props) => {
                           >
                             <div className="team-item">
                               <img
+                                src={getBookImage(book.image)}
                                 className="img-fluid rounded"
-                                src={require(`../../../${book.imageLink}`)}
-                                alt=""
+                                alt={book.name}
                               />
                               <div className="bg-light text-center p-2">
                                 <div className="book-title">

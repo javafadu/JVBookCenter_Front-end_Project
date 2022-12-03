@@ -20,7 +20,6 @@ import { getAllCategories } from "../../../api/category-service";
 import { getAllPublishers } from "../../../api/publisher-service";
 import { getCurrentYear } from "../../../utils/functions/date-time";
 
-import axios from "axios";
 import { imageUpload } from "../../../api/image-service";
 
 const BookAddForm = () => {
@@ -29,7 +28,6 @@ const BookAddForm = () => {
   const [imageSrc, setImageSrc] = useState("");
   const fileImageRef = useRef();
   const navigate = useNavigate();
-  const [imageFileName, setImageFileName] = useState("");
 
   const [categories, setCategories] = useState([]);
   const [authors, setAuthors] = useState([]);
@@ -64,6 +62,7 @@ const BookAddForm = () => {
     bookCategory: "",
     shelfCode: "",
     featured: "",
+    image: "",
   };
 
   const validationSchema = Yup.object({
@@ -97,6 +96,7 @@ const BookAddForm = () => {
         "Please use Upper Case for first letters"
       ),
     featured: Yup.bool().required("Please select"),
+    image: Yup.mixed().required("Please select an image"),
   });
 
   const onSubmit = async (values) => {
@@ -105,16 +105,14 @@ const BookAddForm = () => {
     try {
       const formData = new FormData();
       formData.append("file", values.image);
-      formData.delete("file", fileImageRef.current.files[0]);
-      formData.append("file", fileImageRef.current.files[0], imageFileName);
 
       const respImage = await imageUpload(formData);
+      const imageId = respImage.data.imageId;
 
       const payload = { ...values };
       delete payload.image;
 
-      payload.imageLink = imageFileName;
-      const resp = await createBook(payload);
+      const resp = await createBook(imageId, payload);
       toast("The book is registered successfully!", "success");
       navigate(-1);
     } catch (err) {
@@ -136,11 +134,6 @@ const BookAddForm = () => {
   };
   const handleImageChange = () => {
     const file = fileImageRef.current.files[0];
-    var filename = `${Math.random().toString(32).slice(2)}${
-      fileImageRef.current.files[0].name
-    }`;
-
-    setImageFileName(filename);
     if (!file) return;
 
     formik.setFieldValue("image", file);

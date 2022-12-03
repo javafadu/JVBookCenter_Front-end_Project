@@ -6,6 +6,7 @@ import { formatDateLibrary } from "../../../utils/functions/date-time";
 import Loading from "../../general/loading/loading";
 import { CgCalendarDates } from "react-icons/cg";
 import "./my-books.scss";
+import { getBookImage } from "../../../utils/functions/book";
 
 const MyBooks = () => {
   const [loans, setLoans] = useState([]);
@@ -60,13 +61,9 @@ const MyBooks = () => {
                 <Col md={1}>
                   <a href={`../book-detail/?id=${loan.book.id}`}>
                     <img
-                      src={
-                        loan.book.imageLink
-                          ? require(`../../../${loan.book?.imageLink}`)
-                          : ""
-                      }
-                      alt={loan.name}
-                      className="img-fluid"
+                      src={getBookImage(loan.bookImage)}
+                      className="img-fluid rounded"
+                      alt={loan.book.name}
                     />
                   </a>
                 </Col>

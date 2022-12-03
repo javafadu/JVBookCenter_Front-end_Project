@@ -1,6 +1,7 @@
 import React from "react";
 import loanable from "../../../assets/img/loanable-sm.png";
 import notLoanable from "../../../assets/img/not-loanable-sm.png";
+import { getBookImage } from "../../../utils/functions/book";
 
 const BookCard = (props) => {
   return (
@@ -10,9 +11,9 @@ const BookCard = (props) => {
         href={`./book-detail/?id=${props.id}`}
       >
         <img
+          src={getBookImage(props.image)}
           className="img-fluid rounded"
-          src={require(`../../../${props.imageLink}`)}
-          alt="book_image"
+          alt={props.name}
         />
         <div className="loanable-status">
           {" "}

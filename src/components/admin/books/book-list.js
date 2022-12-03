@@ -6,6 +6,7 @@ import { CgCalendarDates } from "react-icons/cg";
 import { getFilteredBooksByAdmin } from "../../../api/book-service";
 import { formatDateLibrary } from "../../../utils/functions/date-time";
 import "./books.scss";
+import { getBookImage } from "../../../utils/functions/book";
 
 let sortBy = "id";
 let sortType = "DESC";
@@ -86,13 +87,9 @@ const BookList = () => {
                 <Col md={1}>
                   <a href={`./book-edit/?id=${book.id}&bookName=${book.name}`}>
                     <img
-                      src={
-                        book.imageLink
-                          ? require(`../../../${book?.imageLink}`)
-                          : ""
-                      }
+                      src={getBookImage(book.image)}
+                      className="img-fluid rounded"
                       alt={book.name}
-                      className="img-fluid"
                     />
                   </a>
                 </Col>

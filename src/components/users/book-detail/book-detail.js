@@ -5,6 +5,7 @@ import { getBookWithId } from "../../../api/book-service";
 import SectionTitle from "../../general/section-title/section-title";
 import "./book-detail.scss";
 import SameCategoryBooks from "./same-category-books";
+import { getBookImage } from "../../../utils/functions/book";
 
 const BookDetail = (props) => {
   const location = useLocation();
@@ -43,13 +44,11 @@ const BookDetail = (props) => {
           <Col md={6} className="book-image-main">
             <div className="book-container">
               <div class="book">
-                <img
-                  src={
-                    book.imageLink ? require(`../../../${book?.imageLink}`) : ""
-                  }
-                  alt={book.name}
-                  className="img-fluid"
-                />
+              <img
+                              src={getBookImage(book.image)}
+                              className="img-fluid rounded"
+                              alt={book.name}
+                            />
               </div>
             </div>
           </Col>
