@@ -71,9 +71,13 @@ export const createBook = (imageId, book) => {
 };
 
 export const updateBook = (imageId, bookId, book) => {
-  return axios.put(`${API_URL}/books/id=${bookId}&imageId=${imageId}`, book, {
-    headers: authHeader(),
-  });
+  return axios.put(
+    `${API_URL}/books?bookId=${bookId}&imageId=${imageId}`,
+    book,
+    {
+      headers: authHeader(),
+    }
+  );
 };
 
 export const deleteBook = (bookId) => {

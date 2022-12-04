@@ -35,14 +35,12 @@ let isImageChanged = false;
 const BookEditForm = () => {
   const { isUserLogin, user } = useSelector((state) => state.auth);
   let access = false;
-
   if (user.roles.includes("Administrator")) access = true;
 
+  const [imageSrc, setImageSrc] = useState("");
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  const [imageSrc, setImageSrc] = useState("");
   const fileImageRef = useRef();
   const navigate = useNavigate();
 
@@ -112,6 +110,7 @@ const BookEditForm = () => {
 
     try {
       let imageId = values.image[0];
+      
       // isImageChanged görüntü değiştirildiğinde true olacak
       if (isImageChanged) {
         // Mevcut image database den siliniyor
@@ -121,8 +120,8 @@ const BookEditForm = () => {
         const formData = new FormData();
         formData.append("file", newImageFile);
 
-        const respImage = await imageUpload(formData);
-        imageId = respImage.data.imageId;
+        const resp = await imageUpload(formData);
+        imageId = resp.data.imageId;
         isImageChanged = false;
       }
 
