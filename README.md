@@ -14,4 +14,12 @@ Creating Book
 
 Loan Management
 
-User Management
+## User Roles
+Administrator
+Staff
+Member
+
+## Used Dependencies
+@reduxjs/toolkit for central state<br>
+axios for api connection
+
