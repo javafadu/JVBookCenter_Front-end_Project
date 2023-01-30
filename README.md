@@ -1,6 +1,6 @@
 # **_FRONT-END PROJECT_** Library Application
 
-This project is developed with React JS by Javanarlar Backend Developers
+This project is developed with React JS by Feridun OZCELIK as a sample
 
 ## Available Functions
 
